@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <button ion-button (click)='takeQuestion()'> Get Question</button>
+    <!-- <button ion-button (click)='takeOptions()'>Get Options</button> -->
+    <button ion-button (click)='increase()'>Next</button>
+  
+  <!-- <h2>Question : {{ques}}</h2>
+  <h4>{{optionA}}</h4>
+  <h4>{{optionB}}</h4>
+  <h4>{{optionC}}</h4>
+  <h4>{{optionD}}</h4> -->
+  <!-- <h3>{{questions.length}}</h3> -->
+  <!-- <h3>{{questions.length}}</h3> -->
+  <button ion-button (click)='start()'> Speak Answer</button>
+
+  <h3> Your Answer: {{ttstextmatch}}</h3>
+</ion-content>
