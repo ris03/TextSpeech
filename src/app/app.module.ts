@@ -7,6 +7,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { StarttestPage } from '../pages/starttest/starttest';
+import { AnswerPage } from '../pages/answer/answer';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,6 +17,7 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { QuestionsProvider } from '../providers/questions/questions';
 // import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import { HttpModule } from '@angular/http';
     ContactPage,
     HomePage,
     TabsPage,
+    StarttestPage,
+    AnswerPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule, 
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -35,7 +41,9 @@ import { HttpModule } from '@angular/http';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    StarttestPage,
+    AnswerPage
   ],
   providers: [
     StatusBar,

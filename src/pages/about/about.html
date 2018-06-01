@@ -7,18 +7,39 @@
 </ion-header>
 
 <ion-content padding>
-    <button ion-button (click)='takeQuestion()'> Get Question</button>
+    <!-- <button ion-button (click)='takeQuestion()'> Get Question</button> -->
     <!-- <button ion-button (click)='takeOptions()'>Get Options</button> -->
-    <button ion-button (click)='increase()'>Next</button>
+    <!-- <button ion-button (click)='increase()'>Next</button> -->
   
-  <!-- <h2>Question : {{ques}}</h2>
-  <h4>{{optionA}}</h4>
-  <h4>{{optionB}}</h4>
-  <h4>{{optionC}}</h4>
-  <h4>{{optionD}}</h4> -->
-  <!-- <h3>{{questions.length}}</h3> -->
-  <!-- <h3>{{questions.length}}</h3> -->
-  <button ion-button (click)='start()'> Speak Answer</button>
+    <!-- <h2>Question : {{ques}}</h2>
+    <h4>A. {{optionA}}</h4>
+    <h4>B. {{optionB}}</h4>
+    <h4>C. {{optionC}}</h4>
+    <h4>D. {{optionD}}</h4> -->
+<div *ngFor="let que of ques;let i=index">
 
-  <h3> Your Answer: {{ttstextmatch}}</h3>
+  <h2 *ngIf='que.question'>Question : {{que.question}}</h2>
+  <h4 *ngIf='que.question'>A. {{que.options[0]}}</h4>
+  <h4 *ngIf='que.question'>B. {{que.options[1]}}</h4>
+  <h4 *ngIf='que.question'>C. {{que.options[2]}}</h4>
+  <h4 *ngIf='que.question'>D. {{que.options[3]}}</h4>
+  <h2 *ngIf='que.question'>time: {{time}}</h2>
+  <!-- <h3> Your Answer: <span [(ngModel)]='ttstextmatch'></span></h3> -->
+  <!-- <h3> Your Answer: <input name='ttstextmatch' [(ngModel)]='ttstextmatch'></h3> -->
+<!-- </div> -->
+<!-- <div *ngIf='!ques'> -->
+  <h2 *ngIf='!que.question'>Test Finished</h2>
+  <button *ngIf='!que.question' ion-button (click)="onDone()">View Result</button>
+</div>
+  <div *ngIf='!visible'>
+         <h1>ouestions</h1>
+  </div>
+  <div *ngIf='visible'>
+    <h1>ouestionsssssssssss</h1>
+  </div>
+  <!-- <h3>{{questions.length}}</h3> -->
+  <!-- <h3>{{questions.length}}</h3> -->
+  <!-- <button ion-button (click)='takeQuestion()'> Speak Answer</button> -->
+
+  
 </ion-content>
