@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-navbar>
+<ion-header hideBackButton>
+  <ion-navbar hideBackButton>
     <ion-title>
       About
     </ion-title>
@@ -18,7 +18,7 @@
     <h4>D. {{optionD}}</h4> -->
 <div *ngFor="let que of ques;let i=index">
 
-  <h2 *ngIf='que.question'>Question : {{que.question}}</h2>
+  <h2 *ngIf='q<=w'>Question : {{que.question}}</h2>
   <h4 *ngIf='que.question'>A. {{que.options[0]}}</h4>
   <h4 *ngIf='que.question'>B. {{que.options[1]}}</h4>
   <h4 *ngIf='que.question'>C. {{que.options[2]}}</h4>
@@ -28,15 +28,11 @@
   <!-- <h3> Your Answer: <input name='ttstextmatch' [(ngModel)]='ttstextmatch'></h3> -->
 <!-- </div> -->
 <!-- <div *ngIf='!ques'> -->
-  <h2 *ngIf='!que.question'>Test Finished</h2>
-  <button *ngIf='!que.question' ion-button (click)="onDone()">View Result</button>
+
 </div>
-  <div *ngIf='!visible'>
-         <h1>ouestions</h1>
-  </div>
-  <div *ngIf='visible'>
-    <h1>ouestionsssssssssss</h1>
-  </div>
+<h2 *ngIf='q>w'>Test Finished</h2>
+<button *ngIf='q>w' class="btn btn-primary"  ion-button (click)="onDone()">View Result</button>
+
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <button ion-button (click)='takeQuestion()'> Speak Answer</button> -->

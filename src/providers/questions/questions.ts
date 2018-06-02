@@ -22,7 +22,8 @@ export class QuestionsProvider {
           'Maxxy',
           'Bruno',
           'None of the above'
-      ]
+      ],
+      answer:'option A'
     },
       {
         question: 'Who is Chanakya Sethi ?',
@@ -31,7 +32,8 @@ export class QuestionsProvider {
           'Awesome',
           'Too good to be true',
           'All of the above'
-        ]
+        ],
+        answer: 'option B'
       },
       {
         question: 'Who is Chintu ?',
@@ -40,7 +42,8 @@ export class QuestionsProvider {
           'Awesome',
           'Too good to be true',
           'None of the above'
-        ]
+        ],
+        answer:'option C'
       },
       // {
       //   question: 'Who is Khushal ?',
@@ -70,7 +73,7 @@ export class QuestionsProvider {
       //   ]
       // }
     ]
-
+  
   constructor(public http: Http) {
     console.log('Hello QuestionsProvider Provider');
   }
@@ -79,25 +82,22 @@ export class QuestionsProvider {
       // let i = this.index;
       // this.index++;
       let qq = this.questions[this.index];
-      return [qq];
+      return {qustion:[qq],index:this.index};
       // }
-    }
-    getOptions(index:any){
-      if(index<this.questions.length){
-        return this.questions[index].options;
-      }
     }
     setAnswer(answer:any){
       this.answers.push(answer);
-      if(answer==='option A'){
-        this.marks++;
+      if(this.questions[this.index].answer===answer){
+        this.marks+=1;
       }
       this.index++;
   }
   getAnswer(){
     const data ={
       marks:this.marks,
-      answers:this.answers
+      answers:this.answers,
+      length:this.answers.length,
+      length1:this.questions.length
     };
     return data;
   }

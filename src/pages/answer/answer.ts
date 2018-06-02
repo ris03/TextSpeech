@@ -15,8 +15,8 @@ import { QuestionsProvider } from '../../providers/questions/questions';
   templateUrl: 'answer.html',
 })
 export class AnswerPage{
-answers:any
-marks:any
+answers:any;
+marks:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public qq: QuestionsProvider) {
   }
 

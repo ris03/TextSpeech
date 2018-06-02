@@ -15,8 +15,8 @@
 
 <ion-content padding>
 <h2>Answers:</h2>
-<div *ngFor="let answer of answers">
-  <h4>{{answer}}</h4>
+<div *ngFor="let answer of answers;let i=index">
+  <h4>Question {{i+1}}: {{answer}}</h4>
 </div>
 <h2>Marks: {{marks}}</h2>
 </ion-content>
