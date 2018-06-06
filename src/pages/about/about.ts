@@ -63,7 +63,7 @@ export class AboutPage {
   
     }
     start() {
-      this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
     this.speechRecognition.startListening()
       .subscribe(
         (matches: Array<string>) => {
@@ -159,9 +159,6 @@ export class AboutPage {
         catch (e) {
           console.log(e);
         }
-      }
-      vis(){
-      
       }
       increase(){
         // this.j=0;
