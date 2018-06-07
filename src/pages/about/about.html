@@ -1,9 +1,12 @@
 <ion-header hideBackButton>
-  <ion-navbar hideBackButton>
-    <ion-title>
-      About
+  <ion-navbar color="danger" hideBackButton>
+    <ion-title style="padding:0 10px">
+      <span float-left>Ques.{{q}}</span> <span float-right >00:0{{time}}
+      </span>
     </ion-title>
   </ion-navbar>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
@@ -16,26 +19,39 @@
     <h4>B. {{optionB}}</h4>
     <h4>C. {{optionC}}</h4>
     <h4>D. {{optionD}}</h4> -->
-<div *ngFor="let que of ques;let i=index">
+<div *ngFor="let que of ques;let i=index"> 
 
-  <h2 *ngIf='q<=w'>Question : {{que.question}}</h2>
-  <h4 *ngIf='que.question'>A. {{que.options[0]}}</h4>
-  <h4 *ngIf='que.question'>B. {{que.options[1]}}</h4>
-  <h4 *ngIf='que.question'>C. {{que.options[2]}}</h4>
-  <h4 *ngIf='que.question'>D. {{que.options[3]}}</h4>
-  <h2 *ngIf='que.question'>time: {{time}}</h2>
-  <!-- <h3> Your Answer: <span [(ngModel)]='ttstextmatch'></span></h3> -->
-  <!-- <h3> Your Answer: <input name='ttstextmatch' [(ngModel)]='ttstextmatch'></h3> -->
-<!-- </div> -->
-<!-- <div *ngIf='!ques'> -->
+    <h1 *ngIf='q<=w'>{{que.question}}</h1>
+  <ion-item *ngFor='let opt of que.options'>
+    <ion-label >
+      {{opt}}
+      </ion-label>
+    <ion-checkbox color="danger"></ion-checkbox>
+  </ion-item>
 
+
+   <!-- <h1 *ngIf='q<=w'>{{que.question}}</h1>
+  <h4 *ngIf='que.question'>a. {{que.options[0]}}</h4>
+  <h4 *ngIf='que.question'>b. {{que.options[1]}}</h4>
+  <h4 *ngIf='que.question'>c. {{que.options[2]}}</h4>
+  <h4 *ngIf='que.question'>d. {{que.options[3]}}</h4> -->
+  <!-- <h2 *ngIf='que.question'>time: {{time}}</h2> -->
+  <!-- <ion-card *ngFor="let que of ques;let i=index">
+    <ion-card-header class="queS" *ngIf='q<=w'>
+      {{que.question}}
+    </ion-card-header >
+    <ion-card-content class="optn" *ngFor='let opt of que.options'>
+      a. {{opt}}
+    </ion-card-content>
+  </ion-card> -->
+  
 </div>
 <h2 *ngIf='q>w'>Test Finished</h2>
-<button *ngIf='q>w' class="btn btn-primary"  ion-button (click)="onDone()">View Result</button>
+<button outline *ngIf='q>w' class="btn btn-danger"  ion-button (click)="onDone()">View Result</button>
 
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
-  <!-- <button ion-button (click)='takeQuestion()'> Speak Answer</button> -->
+  <button ion-button color='danger' outline (click)='takeQuestion()'> Show Question</button>
 
   
 </ion-content>
