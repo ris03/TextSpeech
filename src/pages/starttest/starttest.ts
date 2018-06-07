@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AboutPage } from '../about/about';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { timer } from 'rxjs/observable/timer';
+
 
 /**
  * Generated class for the StarttestPage page.
@@ -11,6 +13,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
  * Ionic pages and navigation.
  */
 
+ 
 @IonicPage()
 @Component({
   selector: 'page-starttest',
@@ -26,10 +29,11 @@ export class StarttestPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StarttestPage');
-  }
-  ionViewWillEnter() {
-    this.speechRecognition.hasPermission()
+  //   console.log('ionViewDidLoad StarttestPage');
+  // }
+  // ionViewWillEnter() {
+    setTimeout(()=>{
+      this.speechRecognition.hasPermission()
       .then((hasPermission: boolean) => {
   
         if (!hasPermission) {
@@ -48,6 +52,8 @@ export class StarttestPage {
         }
   
      });
+    }, 4500);
+  
   
     }
     readInstruction(){
@@ -89,8 +95,9 @@ export class StarttestPage {
             this.readInstruction();
             })
           }else{
-            this.tts.speak('Please speak again')
-            this.repeat();
+            this.tts.speak('Please speak again').then(()=>{
+            this.repeat();             
+            })
           }    
         })}
 }

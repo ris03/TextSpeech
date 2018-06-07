@@ -16,62 +16,35 @@ export class QuestionsProvider {
   answers:any[]=[];
   questions:any []=[
       {
-        question: 'Who let the dogs out ?',
+        question: 'Which one of these is the national Anthem of India ?',
         options :[
-          'Oreo',
-          'Maxxy',
-          'Bruno',
+          'Vande Matram',
+          'Jai Ho',
+          'Jaane Gaane Maane.......',
           'None of the above'
       ],
-      answer:'option A'
+      answer:'option C'
     },
       {
-        question: 'Who is Chanakya Sethi ?',
+        question: 'Who is the Prime Minister of India ?',
         options :[
-          'Best coder',
-          'Awesome',
-          'Too good to be true',
-          'All of the above'
+          'Rahul Gandhi',
+          'Lallu Prasad',
+          'Arvind Kejriwal',
+          'Narendra Modi'
         ],
-        answer: 'option B'
+        answer: 'option D'
       },
       {
-        question: 'Who is Chintu ?',
+        question: 'When is the next cricket 50-50 WC?',
         options :[
-          'Best coder',
-          'Awesome',
-          'Too good to be true',
-          'None of the above'
+          '2019',
+          '2020 ',
+          '2021',
+          '2022'
         ],
-        answer:'option C'
-      },
-      // {
-      //   question: 'Who is Khushal ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // },
-      // {
-      //   question: 'Who is Rishi ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // },
-      // {
-      //   question: 'Who is Priyanka ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // }
+        answer:'option A'
+      }
     ]
   
   constructor(public http: Http) {
