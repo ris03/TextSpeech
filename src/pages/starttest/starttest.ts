@@ -4,6 +4,7 @@ import { AboutPage } from '../about/about';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { timer } from 'rxjs/observable/timer';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 
 /**
@@ -25,9 +26,11 @@ export class StarttestPage {
   ttstextmatch:string=' ';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public speechRecognition : SpeechRecognition,
-  public tts: TextToSpeech) {
+  public tts: TextToSpeech,private backgroundMode: BackgroundMode) {
+    this.backgroundMode.disable().then(()=>{
+      this.tts.stop();
+    })
   }
-
   ionViewDidLoad() {
   //   console.log('ionViewDidLoad StarttestPage');
   // }

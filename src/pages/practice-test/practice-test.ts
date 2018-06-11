@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 /**
  * Generated class for the PracticeTestPage page.
@@ -17,7 +18,10 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
 })
 export class PracticeTestPage {
   text:string='';
-  constructor(public navCtrl: NavController, public navParams: NavParams,public tts: TextToSpeech,public speechRecognition: SpeechRecognition) {
+  constructor(private backgroundMode: BackgroundMode,public navCtrl: NavController, public navParams: NavParams,public tts: TextToSpeech,public speechRecognition: SpeechRecognition) {
+    this.backgroundMode.disable().then(()=>{
+      this.tts.stop();
+    })
   }
   ionViewWillEnter() {
     this.speechRecognition.hasPermission()

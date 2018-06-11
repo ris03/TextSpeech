@@ -81,5 +81,6 @@
     <plugin name="cordova-plugin-speechrecognition" spec="^1.2.0" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <engine name="android" spec="7.0.0" />
 </widget>

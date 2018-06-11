@@ -4,33 +4,46 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-slides pager="true">
- 
+
+  <ion-slides (ionSlideDidChange)="slideChanged()" pager="true">
     <ion-slide>
-      <!-- <img src="images/slide1.png" /> -->
-      <h2>Slide 1</h2>
+      <img src="https://www.shareicon.net/data/128x128/2016/09/01/823604_multimedia_512x512.png" />
+      <h2>Welcome to HandsFree</h2>
+      <button ion-button click='goToHome()'>Skip</button>
     </ion-slide>
    
     <ion-slide>
-      <!-- <img src="images/slide2.png" /> -->
-      <h2>Slide 2</h2>
+      <img src="https://png.icons8.com/metro/1600/book.png" />
+      <h2>Handsfree lets the user to practise as well as give test with users voice.</h2>
+      <button ion-button (click)='goToHome()'>Skip</button>
+      
+      
     </ion-slide>
    
     <ion-slide>
       <!-- <img src="images/slide3.png" /> -->
-      <h2>Slide 3</h2>
+      <img src="https://png.icons8.com/metro/1600/book.png" />
+      
+      <h2>Speak your heart out.</h2>
+      <button ion-button click='goToHome()'>Skip</button>
+      
+      
     </ion-slide>
    
     <ion-slide>
       <ion-row>
         <ion-col>
           <!-- <img src="images/slide4.png" /> -->
-          <h2>Slide 4</h2>
+      <img src="https://www.shareicon.net/data/128x128/2017/07/13/888374_chart_512x512.png" />
+          
+          <h2>Results are shown in form of graphs.</h2>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <button ion-button color="light">Start Using My App</button>
+          <!-- <button ion-button (click)='goToHome()' color="light">Start Using My App</button> -->
         </ion-col>
-      </ion-row>
+      </ion-row>  
+      <button ion-button (click)='goToHome()'>Skip</button>
+      
     </ion-slide>
