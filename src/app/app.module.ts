@@ -18,6 +18,9 @@ import { QuestionsProvider } from '../providers/questions/questions';
 // import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { PracticeTestPage } from '../pages/practice-test/practice-test';
+import { IntroPage } from '../pages/intro/intro';
+import {IonicStorageModule} from '@ionic/storage'
 
 @NgModule({
   declarations: [
@@ -27,13 +30,16 @@ import { FormsModule } from '@angular/forms';
     HomePage,
     TabsPage,
     StarttestPage,
-    AnswerPage
+    AnswerPage,
+    PracticeTestPage,
+    IntroPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule, 
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +49,9 @@ import { FormsModule } from '@angular/forms';
     HomePage,
     TabsPage,
     StarttestPage,
-    AnswerPage
+    AnswerPage,
+    PracticeTestPage,
+    IntroPage
   ],
   providers: [
     StatusBar,
@@ -51,7 +59,7 @@ import { FormsModule } from '@angular/forms';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TextToSpeech,
     SpeechRecognition,
-    QuestionsProvider
+    QuestionsProvider,
   ]
 })
 export class AppModule {}
