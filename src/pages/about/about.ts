@@ -31,7 +31,7 @@ export class AboutPage {
   ans=this.qq.getAnswer();
   q=this.ans.length+1
   w=this.ans.length1;
-  status:boolean=false;
+  status:boolean[]=[false,false,false,false];
 
 
 
@@ -191,8 +191,8 @@ export class AboutPage {
         this.navCtrl.setRoot(AnswerPage)
         this.navCtrl.popToRoot();
       }
-      cClick(){
-        this.status=!this.status;
+      cClick(i){
+        this.status[i]=!this.status[i];
         console.log(this.status)
       }
  

@@ -20,7 +20,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { PracticeTestPage } from '../pages/practice-test/practice-test';
 import { IntroPage } from '../pages/intro/intro';
-import {IonicStorageModule} from '@ionic/storage'
+import {IonicStorageModule} from '@ionic/storage';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {IonicStorageModule} from '@ionic/storage'
     TextToSpeech,
     SpeechRecognition,
     QuestionsProvider,
+    BackgroundMode
   ]
 })
 export class AppModule {}
