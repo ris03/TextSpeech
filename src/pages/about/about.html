@@ -23,7 +23,7 @@
 
     <h1 *ngIf='q<=w'>{{que.question}}</h1>
   <ion-item *ngFor='let opt of que.options'>
-    <ion-label >
+    <ion-label (click)="clickEvent()" [ngClass]="status ? 'success' : 'danger'" >
       {{opt}}
       </ion-label>
     <ion-checkbox color="danger"></ion-checkbox>
@@ -51,7 +51,7 @@
 
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
-  <button ion-button color='danger' outline (click)='takeQuestion()'> Repeat</button>
-
+  <button ion-button color='danger' outline (click)='takeQuestion()'>Repeat</button>
+  
   
 </ion-content>

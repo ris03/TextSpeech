@@ -31,7 +31,7 @@ export class AboutPage {
   ans=this.qq.getAnswer();
   q=this.ans.length+1
   w=this.ans.length1;
-
+  status: boolean = false
 
 
   subscription: Subscription;
@@ -188,6 +188,9 @@ export class AboutPage {
       onDone(){
         this.navCtrl.setRoot(AnswerPage)
         this.navCtrl.popToRoot();
+      }
+      clickEvent(){
+        this.status = !this.status;
       }
  
   
