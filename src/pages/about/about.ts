@@ -31,7 +31,9 @@ export class AboutPage {
   ans=this.qq.getAnswer();
   q=this.ans.length+1
   w=this.ans.length1;
-  status: boolean = false
+  status:boolean[]=[false,false,false,false];
+  tno:number=0;
+
 
 
   subscription: Subscription;
@@ -72,6 +74,8 @@ export class AboutPage {
             this.tts.speak('You selected option a')          
             .then(() => {
               this.ttstextmatch='option A';
+              this.status[0]=true;
+              this.tno++;
               this.qq.setAnswer(this.ttstextmatch);
               // this.q++;
               // this.navCtrl.setRoot(AboutPage); 
@@ -83,7 +87,9 @@ export class AboutPage {
           } else if (this.ttstext === 'be' ||this.ttstext === 'b' ) {
             this.tts.speak('You selected option B')          
             .then(() => {
-              this.ttstextmatch='option B'
+              this.ttstextmatch='option B';
+              this.status[1]=true;
+              this.tno++;
               this.qq.setAnswer(this.ttstextmatch)              
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
               
@@ -93,7 +99,9 @@ export class AboutPage {
           } else if (this.ttstext === 'see' ||this.ttstext === 'she'||this.ttstext === 'c') {
             this.tts.speak('You selected option C')          
             .then(() => {
-              this.ttstextmatch='option C'
+              this.ttstextmatch='option C';
+              this.status[2]=true;
+              this.tno++;
               this.qq.setAnswer(this.ttstextmatch)              
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
@@ -102,7 +110,9 @@ export class AboutPage {
           } else if (this.ttstext === 'de'||this.ttstext === 'd') {
             this.tts.speak('You selected option D')          
             .then(() => {
-              this.ttstextmatch='option D'
+              this.ttstextmatch='option D';
+              this.status[3]=true;
+              this.tno++;
               this.qq.setAnswer(this.ttstextmatch)              
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
@@ -112,8 +122,9 @@ export class AboutPage {
             this.tts.speak('your selected option is Not available')          
             .then(() => {
               this.ttstextmatch='Option Not available'
-              this.qq.setAnswer(this.ttstextmatch)              
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);               
+              // this.qq.setAnswer(this.ttstextmatch)              
+              // this.navCtrl.setRoot(this.navCtrl.getActive().component);   
+              this.start();            
               // this.takeQuestion();
             }) 
             .catch((reason: any) => console.log(reason));
@@ -148,9 +159,9 @@ export class AboutPage {
             rate: 0.7
           })
           .then(()=> this.tts.speak('Option A,'+TranslateText[0].options[0]))
-          .then(()=> this.tts.speak('Option B '+TranslateText[0].options[1]))
-          .then(()=> this.tts.speak('Option Cd' +TranslateText[0].options[2]))
-          .then(()=> this.tts.speak('Option D' +TranslateText[0].options[3]))
+          .then(()=> this.tts.speak('Option B, '+TranslateText[0].options[1]))
+          .then(()=> this.tts.speak('Option C,'+TranslateText[0].options[2]))
+          .then(()=> this.tts.speak('Option D,' +TranslateText[0].options[3]))
           .then(()=>{
               this.timer()
           })
@@ -160,15 +171,15 @@ export class AboutPage {
           console.log(e);
         }
       }
-      increase(){
-        // this.j=0;
-        if(this.i===3){
-          this.i=0;
-        } else{
-          this.i++;
-        }
-        this.takeQuestion();
-      }
+      // increase(){
+      //   // this.j=0;
+      //   if(this.i===3){
+      //     this.i=0;
+      //   } else{
+      //     this.i++;
+      //   }
+      //   this.takeQuestion();
+      // }
       timer(){
         // while(this.time>0){
         //   this.time--;
@@ -182,17 +193,24 @@ export class AboutPage {
             this.start();
           }
         }
-
         )
       }
       onDone(){
-        this.navCtrl.setRoot(AnswerPage)
+        this.navCtrl.setRoot(AnswerPage);
         this.navCtrl.popToRoot();
       }
-      clickEvent(){
-        this.status = !this.status;
-      }
- 
-  
-
+      cClick(i){
+        if(this.tno===0){
+          this.status[i]=true;
+          this.tno++;
+        } else{
+          if(this.status[i]){
+            this.status[i]=false;
+            this.tno--;
+          } else {
+            this.status[i]=this.status[i]
+          }
+        }
+        console.log(this.status)
+      } 
 }

@@ -27,13 +27,14 @@ export class IntroPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage,public tts: TextToSpeech) {
   }
   goToHome(){
+    this.tts.stop();
     this.navCtrl.setRoot(TabsPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad IntroPage');
     setTimeout(()=>{
     this.tts.speak('Welcome to HandsFree');
-       },3500)
+       },500)
   }
   goToSlide() {
     this.slides.slideTo(2, 500);
@@ -48,8 +49,13 @@ export class IntroPage {
         this.tts.speak('Speak your heart out.');         
     }else if(currentIndex === 3){
         this.tts.speak('Results are shown as graphs.');         
-    }else{
-      this.tts.speak('Welcome to uListen');               
     }
+    
   }
+  onStart(){
+    this.navCtrl.setRoot(TabsPage);    
+  }
+//   ionViewWillLeave(){
+// this.tts.stop();
+//   }
 }

@@ -11,8 +11,8 @@ import { StarttestPage } from '../starttest/starttest';
 })
 export class TabsPage {
 
-  // tab1Root = PracticeTestPage;
-  // tab2Root = StarttestPage;
+  tab1Root = PracticeTestPage;
+  tab2Root = StarttestPage;
   // tab3Root = ContactPage;
 
   constructor() {

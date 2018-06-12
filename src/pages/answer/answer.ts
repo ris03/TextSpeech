@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QuestionsProvider } from '../../providers/questions/questions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the AnswerPage page.
@@ -28,7 +29,8 @@ marks:any;
     this.answers=data.answers;
     this.marks=data.marks
   }
-  onD(){
+  onStart(){
+    this.navCtrl.setRoot(TabsPage);
     this.navCtrl.popToRoot();
   }
 }
