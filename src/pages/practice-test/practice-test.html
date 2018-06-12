@@ -6,19 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Practice</ion-title>
+  <ion-navbar color='danger'>
+    <ion-title >Practice</ion-title>
   </ion-navbar>
-  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Serif" rel="stylesheet">
 </ion-header>
 
 
 <ion-content padding>
   <h1>Here you can try to speak correct options so that no wrong answer is recorded</h1> <br>
-  <h2>Say 'a': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
-  <h2>Say 'b': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
-  <h2>Say 'c': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
-  <h2>Say 'd': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
+  <h2>Say 'a': <ion-icon color="{{mic.color}}" (click)='processSpeech()' float-right name="mic"></ion-icon></h2>
+  <h2>Say 'b': <ion-icon (click)='processSpeech()' float-right name="mic"></ion-icon></h2>
+  <h2>Say 'c': <ion-icon (click)='processSpeech()' float-right name="mic"></ion-icon></h2>
+  <h2>Say 'd': <ion-icon (click)='processSpeech()' float-right name="mic"></ion-icon></h2>
+  <br>
+  <ion-spinner *ngIf="recognizing" name="dots" style="font-size: 10rem; text-align: center"></ion-spinner>
+  <span #recognitionResult></span>
   <br>
   <h2>You said: {{text}}</h2>
 </ion-content>

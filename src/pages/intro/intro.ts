@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AboutPage } from '../about/about';
 import { Storage } from '@ionic/storage';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the IntroPage page.
@@ -20,10 +21,12 @@ export class IntroPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage) {
   }
   goToHome(){
-    this.navCtrl.setRoot(AboutPage);
+    this.navCtrl.setRoot(TabsPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad IntroPage');
   }
-
+  onStart(){
+    this.navCtrl.setRoot(TabsPage);    
+  }
 }

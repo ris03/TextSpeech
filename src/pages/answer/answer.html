@@ -6,9 +6,10 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>answer</ion-title>
+  <ion-navbar color='danger'>
+    <ion-title>Your Result</ion-title>
   </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300" rel="stylesheet">
 
 </ion-header>
 
@@ -19,4 +20,6 @@
   <h4>Question {{i+1}}: {{answer}}</h4>
 </div>
 <h2>Marks: {{marks}}</h2>
+<br><br>
+<button outline class="btn btn-danger"  ion-button (click)="onStart()">Go to start</button>
 </ion-content>

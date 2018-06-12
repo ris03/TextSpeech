@@ -22,12 +22,24 @@
 <div *ngFor="let que of ques;let i=index"> 
 
     <h1 *ngIf='q<=w'>{{que.question}}</h1>
-  <ion-item *ngFor='let opt of que.options'>
+  <ion-item *ngFor='let opt of que.options' (click)='cClick()' [background-color]="status ? 'blue' : 'red'">
     <ion-label >
       {{opt}}
       </ion-label>
-    <ion-checkbox color="danger"></ion-checkbox>
+    <!-- <ion-checkbox color="danger"></ion-checkbox> -->
   </ion-item>
+  <!-- <div class="checkbox">
+    <label><input type="checkbox" (selected)='true' value="">{{que.options[0]}}</label>
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox" value="">{{que.options[1]}}</label>
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox" value="">{{que.options[2]}}</label>
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox" value="">{{que.options[3]}}</label>
+  </div> -->
 
 
    <!-- <h1 *ngIf='q<=w'>{{que.question}}</h1>

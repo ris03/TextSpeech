@@ -31,6 +31,7 @@ export class AboutPage {
   ans=this.qq.getAnswer();
   q=this.ans.length+1
   w=this.ans.length1;
+  status:boolean=false;
 
 
 
@@ -112,8 +113,9 @@ export class AboutPage {
             this.tts.speak('your selected option is Not available')          
             .then(() => {
               this.ttstextmatch='Option Not available'
-              this.qq.setAnswer(this.ttstextmatch)              
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);               
+              // this.qq.setAnswer(this.ttstextmatch)              
+              // this.navCtrl.setRoot(this.navCtrl.getActive().component);   
+              this.start();            
               // this.takeQuestion();
             }) 
             .catch((reason: any) => console.log(reason));
@@ -188,6 +190,10 @@ export class AboutPage {
       onDone(){
         this.navCtrl.setRoot(AnswerPage)
         this.navCtrl.popToRoot();
+      }
+      cClick(){
+        this.status=!this.status;
+        console.log(this.status)
       }
  
   
