@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { AboutPage } from '../about/about';
 // import { BackgroundMode } from '@ionic-native/background-mode';
 
 /**
@@ -20,16 +21,17 @@ export class PracticeTestPage {
   text:string='';
   constructor(public navCtrl: NavController, public navParams: NavParams,public tts: TextToSpeech,public speechRecognition: SpeechRecognition) {
   }
-  ionViewWillEnter() {
+  ionViewWillLoad() {
     // this.tts.stop();
-    this.tts.speak('');
     this.speechRecognition.hasPermission()
-      .then((hasPermission: boolean) => {
-        if (!hasPermission) {
+    .then((hasPermission: boolean) => {
+      if (!hasPermission) {
         this.speechRecognition.requestPermission()
-          .then(
-            () => 
-              console.log('Granted'),
+        .then(
+          () => {
+          console.log('Granted'),
+          this.tts.speak('Here you can try to speak correct options so that no wrong answer is recorded. Say a b c and d to practice and say stop to stop recording and go to test page');
+          }
             // () =>             
           )
         }
@@ -39,7 +41,11 @@ export class PracticeTestPage {
       this.speechRecognition.startListening()
       .subscribe(
         (matches: Array<string>) => {
-          this.text = matches[0];})
+          this.text = matches[0];
+        if(this.text==='stop'){
+          this.speechRecognition.stopListening();
+          this.navCtrl.push(AboutPage)
+        }})
         }
   // private mic_off: any = {
   //   icon: 'mic',
@@ -100,7 +106,7 @@ export class PracticeTestPage {
   //   this.platform.ready().then((readySource) => {
   //     console.log('Platform ready from', readySource);
   //     let _window = (<any>window);
-
+         
   //     if (this.platform.is('cordova')) {
   //       this.recognition = new _window.SpeechRecognition();
   //       this.initializeRecognition();

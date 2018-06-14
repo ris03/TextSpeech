@@ -1,36 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>uListen</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>with
-    This starter project comes  simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <button ion-button (click)="speak()">Convert</button> 
-  <button ion-button (click)="start()">Get Text</button> 
-  <!-- <button ion-button (click)="sayText()">Convert 1</button>  -->
-  
-  <ion-textarea [(ngModel)]='ttstext'>
- 
-    </ion-textarea>
-    <ion-textarea [(ngModel)]='text'>
-
-      </ion-textarea>
-  <!-- <ion-item>
-    <ion-label>
-      Text
-    </ion-label>
-    <ion-textarea [(ngModel)]="text">
-
-    </ion-textarea>
-  </ion-item>
-  <button ion-button (click)="sayText()">Convert</button> -->
+<h2>Welcome to uListen</h2>
+<button ion-button icon-start  color="danger" (click)="signin()">
+  <ion-icon name="star"></ion-icon>
+  Sign In
+</button><button ion-button icon-start outline color="danger" (click)="register()">
+  <ion-icon name="star"></ion-icon>
+  Register
+</button>
 </ion-content>

@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StarttestPage } from '../pages/starttest/starttest';
 import { AnswerPage } from '../pages/answer/answer';
+import { SigninPage } from '../pages/signin/signin';
+import { RegisterPage } from '../pages/register/register';
+import { TestsPage } from '../pages/tests/tests';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +25,8 @@ import { PracticeTestPage } from '../pages/practice-test/practice-test';
 import { IntroPage } from '../pages/intro/intro';
 import {IonicStorageModule} from '@ionic/storage';
 import { BackgroundMode } from '@ionic-native/background-mode';
+import { AuthProvider } from '../providers/auth/auth';
+import { TestsProvider } from '../providers/tests/tests';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,10 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     StarttestPage,
     AnswerPage,
     PracticeTestPage,
-    IntroPage
+    IntroPage,
+    SigninPage,
+    RegisterPage,
+    TestsPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,10 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     StarttestPage,
     AnswerPage,
     PracticeTestPage,
-    IntroPage
+    IntroPage,
+    SigninPage,
+    RegisterPage,
+    TestsPage
   ],
   providers: [
     StatusBar,
@@ -61,7 +72,9 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     TextToSpeech,
     SpeechRecognition,
     QuestionsProvider,
-    BackgroundMode
+    BackgroundMode,
+    AuthProvider,
+    TestsProvider
   ]
 })
 export class AppModule {}

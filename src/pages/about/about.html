@@ -19,15 +19,15 @@
     <h4>B. {{optionB}}</h4>
     <h4>C. {{optionC}}</h4>
     <h4>D. {{optionD}}</h4> -->
-<div *ngFor="let que of ques;let i=index"> 
+<div> 
 
-    <h1 *ngIf='q<=w'>{{que.question}}</h1>
-  <ion-item *ngFor='let opt of que.options; let i = index'>
+    <h1 *ngIf='q<=w'>{{ques}}</h1>
+  <ion-item *ngFor='let opt of options; let i = index'>
     <ion-label (click)='cClick(i)' *ngIf='status[i];else hhh' style="color:red" >
       {{opt}}
       </ion-label>
       <ng-template #hhh>
-        <ion-label disabled='true' (click)='cClick(i)'>
+        <ion-label  (click)='cClick(i)'>
           {{opt}}
         </ion-label>
       </ng-template>
@@ -69,6 +69,7 @@
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
   <button ion-button color='danger' outline (click)='takeQuestion()'>Repeat</button>
+  <button ion-button color='danger' outline (click)='next()'>Next</button>
   
   
 </ion-content>

@@ -26,7 +26,8 @@ export class StarttestPage {
   ttstext:string=' ';
   ttstextmatch:string=' ';
   speak:boolean=false
-
+  // id = this.navParams.get('id');
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,public speechRecognition : SpeechRecognition,
   public tts: TextToSpeech,private backgroundMode: BackgroundMode,public app: App) {
     this.backgroundMode.disable().then(()=>{
@@ -37,6 +38,7 @@ export class StarttestPage {
   //   console.log('ionViewDidLoad StarttestPage');
   // }
   // ionViewWillEnter() {
+    // console.log(this.id);
       this.speechRecognition.hasPermission()
       .then((hasPermission: boolean) => {
   
@@ -94,6 +96,7 @@ export class StarttestPage {
     // this.tts.stop();
     this.speak=false
     this.app.getRootNav().setRoot(AboutPage);
+
   }
   repeat(){
     this.speechRecognition.startListening()

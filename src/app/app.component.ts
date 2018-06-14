@@ -10,6 +10,7 @@ import { StarttestPage } from '../pages/starttest/starttest';
 import { Storage } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { IntroPage } from '../pages/intro/intro';
+import { HomePage } from '../pages/home/home';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,7 @@ export class MyApp {
       this.storage.get('introShown').then((result) => {
  
         if(result){
-          this.rootPage = TabsPage;
+          this.rootPage = HomePage;
         } else {
           this.rootPage = IntroPage;
           this.storage.set('introShown', true);

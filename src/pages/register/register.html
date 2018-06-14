@@ -1,0 +1,42 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>uListen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <h2>Sign-Up</h2>
+      <ion-item>
+        <ion-label floating>name</ion-label>
+        <ion-input type="text" #name></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>E-mail</ion-label>
+          <ion-input type="email" #email></ion-input>
+        </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" #password></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Confirm Password</ion-label>
+          <ion-input type="password" #cpassword></ion-input>
+        </ion-item>
+    
+    </ion-list>
+    
+    <div padding>
+      <button block outline ion-button (click)="onRegister()">Register</button>
+    </div>
+</ion-content>

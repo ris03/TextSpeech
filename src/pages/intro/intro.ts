@@ -6,6 +6,7 @@ import { TabsPage } from '../tabs/tabs';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { HomePage } from '../home/home';
 
 
 /**
@@ -28,7 +29,7 @@ export class IntroPage {
   }
   goToHome(){
     this.tts.stop();
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(HomePage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad IntroPage');
@@ -53,7 +54,7 @@ export class IntroPage {
     
   }
   onStart(){
-    this.navCtrl.setRoot(TabsPage);    
+    this.navCtrl.setRoot(HomePage);    
   }
 //   ionViewWillLeave(){
 // this.tts.stop();
