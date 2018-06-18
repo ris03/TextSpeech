@@ -67,5 +67,8 @@ export class RegisterPage {
       }
     }
   }
+  onlogin(){
+    this.navCtrl.push(SigninPage);
+  }
 
 }

@@ -1,5 +1,5 @@
 <ion-header hideBackButton>
-  <ion-navbar color="danger" hideBackButton>
+  <ion-navbar color="navred" hideBackButton>
     <ion-title style="padding:0 10px">
       <span float-left>Ques.{{q}}</span> <span float-right >00:0{{time}}
       </span>
@@ -23,7 +23,7 @@
 
     <h1 *ngIf='q<=w'>{{ques}}</h1>
   <ion-item *ngFor='let opt of options; let i = index'>
-    <ion-label (click)='cClick(i)' *ngIf='status[i];else hhh' style="color:red" >
+    <ion-label (click)='cClick(i)' *ngIf='status[i];else hhh' style="color:rgb(3, 85, 84)" >
       {{opt}}
       </ion-label>
       <ng-template #hhh>
@@ -64,12 +64,12 @@
   
 </div>
 <h2 *ngIf='q>w'>Test Finished</h2>
-<button outline *ngIf='q>w' class="btn btn-danger"  ion-button (click)="onDone()">View Result</button>
+<button outline *ngIf='q>w' class="btn" color="navred"  ion-button (click)="onDone()">View Result</button>
 
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
-  <button ion-button color='danger' outline (click)='takeQuestion()'>Repeat</button>
-  <button ion-button color='danger' outline (click)='next()'>Next</button>
+  <button ion-button color='navred' outline (click)='takeQuestion()'>Repeat</button>
+  <button ion-button color='navred' outline (click)='next()'>Next</button>
   
   
 </ion-content>

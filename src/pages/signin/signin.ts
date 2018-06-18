@@ -2,6 +2,7 @@ import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TabsPage } from '../tabs/tabs';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the SigninPage page.
@@ -56,5 +57,8 @@ export class SigninPage {
         }
       )
     }
+  }
+  oncreate(){
+    this.navCtrl.push(RegisterPage)
   }
 }

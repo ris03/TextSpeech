@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="navred" hideBackButton>
     <ion-title>uListen</ion-title>
   </ion-navbar>
 
@@ -15,20 +15,21 @@
 
 <ion-content padding>
   <ion-list>
-    <h2>Sign-In</h2>
+    <h2 style="padding-left:38%">Sign-In</h2>
     <ion-item>
-      <ion-label floating>Username</ion-label>
+      <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="mail"></ion-icon>E-mail</ion-label>
       <ion-input type="text" #username></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label floating>Password</ion-label>
+      <ion-label floating><ion-icon color="navred"  style="padding-right:5px;font-size:3rem;" name="lock"></ion-icon>Password</ion-label>
       <ion-input type="password" #password></ion-input>
     </ion-item>
   
   </ion-list>
   
-  <div padding>
-    <button block outline ion-button (click)="signIn()">Sign In</button>
+  <div style="padding-left:34%">
+    <button color="navred" ion-button (click)="signIn()">Sign In</button>
   </div>
+  <h5 style="font-size:12px;padding-left:25%">Create new account!! <span (click)="oncreate()" style="color:rgb(3, 85, 84)">Sign up</span></h5>
 </ion-content>

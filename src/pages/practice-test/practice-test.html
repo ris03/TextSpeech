@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color='danger'>
+  <ion-navbar color='navred'>
     <ion-title >Practice</ion-title>
   </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Serif" rel="stylesheet">
@@ -14,14 +14,21 @@
 
 
 <ion-content padding>
+    <!-- <ion-grid>
+        <ion-row>
+          <ion-col style="border-style:groove;border-width:2px;height:10rem;padding-left:20%;padding-right:2%" col-6>This</ion-col>
+          <ion-col col-6>This column will take 6 columns</ion-col>
+        </ion-row>
+      </ion-grid> -->
   <h1>Here you can try to speak correct options so that no wrong answer is recorded</h1> <br>
   <h2>Say 'a': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
   <h2>Say 'b': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
   <h2>Say 'c': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
-  <h2>Say 'd': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2>
+  <h2>Say 'd': <ion-icon (click)='speak()' float-right name="mic"></ion-icon></h2> 
   <br>
   <!-- <ion-spinner *ngIf="recognizing" name="dots" style="font-size: 10rem; text-align: center"></ion-spinner>
   <span #recognitionResult></span> -->
   <!-- <br> -->
   <h2>You said: {{text}}</h2>
+
 </ion-content>
