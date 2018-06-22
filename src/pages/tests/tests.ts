@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController,App } from 'ionic-angular';
 import { TestsProvider } from '../../providers/tests/tests';
 import { StarttestPage } from '../starttest/starttest';
+import { QuestionsProvider } from '../../providers/questions/questions';
+import { PractisestarttestPage } from '../practisestarttest/practisestarttest';
 
 /**
  * Generated class for the TestsPage page.
@@ -23,14 +25,19 @@ export class TestsPage {
   //COMPLETED TESTS TAB VARIABLE
   completedTests: any[] = [];
   filteredcompletedTests: any[] = [];
-
+  practiseTests:any[]=[];
+  x=this.QuestionsProvider.practisetests;
   constructor(public navCtrl: NavController, public navParams: NavParams,private testService: TestsProvider,
-    private ldCtrl: LoadingController,public app: App
+    private ldCtrl: LoadingController,public app: App,public QuestionsProvider:QuestionsProvider
 ) {
   }
 
-  ionViewDidEnter() {
-    console.log('ionViewDidLoad TestsPage');
+  ionViewWillEnter() {
+    // this.tests=this.QuestionsProvider.getQues();
+    // console.log("Tests"+this.tests)
+    console.log(this.x);
+    console.log(this.x[0].testname);
+    console.log('ionViewDidLoad TestsPagee');
     let loader = this.ldCtrl.create({
       spinner: 'crescent'
     });
@@ -57,13 +64,21 @@ export class TestsPage {
   } 
   onProceed(id:string){
     console.log(id);
-    console.log('ques id',this.tests[id].qustions);
+    console.log('ques id',this.tests[id]);
+    this.testService.testname=this.tests[id].testName;
+    this.testService.category=this.tests[id].category;
+    this.testService.testId=this.tests[id]._id;
     this.testService.getAllQuestions(this.tests[id].questions).subscribe(
       (data)=>{
         console.log(data)
         this.app.getRootNav().setRoot(StarttestPage);
       }
     )
+  }
+  view(i:any){
+   console.log(i);
+   this.QuestionsProvider.get(i);
+   this.app.getRootNav().setRoot(PractisestarttestPage);   
   }
 
 }

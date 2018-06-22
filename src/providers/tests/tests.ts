@@ -9,15 +9,16 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /*
   Generated class for the TestsProvider provider.
-
+  
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
 export class TestsProvider implements OnInit {
 
-  token;
+    token:string;
     user;
+    testId:any
     testIds: any[] = [];
     completedTest: any[] = [];
     assignedTests: any[] = [];
@@ -25,7 +26,10 @@ export class TestsProvider implements OnInit {
     index=0;
     marks=0;
     answers:any[]=[];
-    apiUrl: string = 'https://cfe-candidate.herokuapp.com';
+    category:any
+    testname:any
+    // apiUrl: string = 'https://cfe-candidate.herokuapp.com';
+    apiUrl: string = 'http://localhost:4000';
 
     constructor(private http: Http,private userService: AuthProvider
     ) {
@@ -61,6 +65,7 @@ export class TestsProvider implements OnInit {
     getAllTests() {
       this.user = window.localStorage.getItem('user');
         this.token = window.localStorage.getItem('token');
+        console.log(this.token);    
         
       // this.user = this.userService.user;
       // this.token = this.userService.authToken;
@@ -126,6 +131,7 @@ export class TestsProvider implements OnInit {
       this.marks=0;
       this.answers=[];
       this.questions=[];
+      this.testIds=qusIds;
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'JWT ' + this.token);
@@ -150,6 +156,7 @@ export class TestsProvider implements OnInit {
     getStateofTest() {
         let userid = JSON.parse(this.user).email;
         let headers = new Headers();
+        this.token = window.localStorage.getItem('token');        
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'JWT ' + this.token);
         return this.http.put(this.apiUrl + '/response/state/' + userid, { tids: this.testIds, practice: false }, { headers: headers })
@@ -166,6 +173,11 @@ export class TestsProvider implements OnInit {
         console.log('my answer',answer);
         console.log('asli answer',this.questions[this.index].answer)
         console.log('sent answer'+answer);  
+        console.log('question',this.questions[this.index])
+        // let answr={
+        //     userAnswer:answer,
+        //     question:this.questions[this.index]
+        // }
         this.answers.push(answer);
         console.log('array'+this.answers)
         if(this.questions[this.index].answer===answer){
@@ -184,5 +196,39 @@ export class TestsProvider implements OnInit {
       };
       return data;
     }
+    saveAnswer(){
+        console.log('saved');
+        console.log(this.apiUrl + '/tests/saveanswer')
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'JWT ' + this.token);
+        return this.http.put(this.apiUrl + '/tests/saveans', { answer: this.answers,userID:this.userService.user.id,testID:this.testId,testName:this.testname,category:this.category }, { headers: headers })
+            .map((response: Response) => {
+                console.log("inside"+response.json())
+                return response.json();
+            })
+            .catch(this._errorHandler);
+                }
+    // response(){
+    //     let headers = new Headers();
+    //     headers.append('Content-Type', 'application/json');
+    //     headers.append('Authorization', 'JWT ' + this.token);   
+    // }
+    getresult(){
+        console.log("result entering");
+        let headers = new Headers();
+        let user = this.userService.user;
+        this.token = window.localStorage.getItem('token');                
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'JWT ' + this.token);
+        // headers.append('id ', this.userService.user.id);
+        console.log('token', this.token);
+        return this.http.get(this.apiUrl + '/tests/appresult/'+this.userService.user.id,{headers: headers }).map((response:Response)=>{  
+            console.log("result================="+JSON.stringify(response.json()));
+             return response.json();
+             });
+           }
+    }
+    
+ 
 
-}

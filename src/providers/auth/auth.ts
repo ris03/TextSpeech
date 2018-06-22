@@ -13,7 +13,8 @@ import { Observable } from 'rxjs/Rx';
 */
 @Injectable()
 export class AuthProvider {
-
+// apiUrl: string = 'https://cfe-candidate.herokuapp.com';
+apiUrl: string = 'http://localhost:4000';
   public user:any;
   public authToken:any;
   constructor(public http: Http, public alertCtrl: AlertController
@@ -30,8 +31,7 @@ export class AuthProvider {
   }
   _errorHandler(error: any) {
     console.error(error);
-    if (error.status == 0) {
-      this.alert('Server Not responding!!')      
+    if (error.status == 0) {      
         return Observable.throw({ _body: JSON.stringify({ msg: 'Server Not responding!!' }) });
     } else if (error.status > 400 && error.status < 500) {
       this.alert('Something went wrong!!')
@@ -46,7 +46,7 @@ export class AuthProvider {
     console.log("service",user)
     let headers=new Headers;
     headers.append('Content-Type','application/json');
-    return this.http.post('https://cfe-candidate.herokuapp.com/users/register',user,{headers:headers}).map((res:Response) =>{
+    return this.http.post(this.apiUrl+'/users/register',user,{headers:headers}).map((res:Response) =>{
       return res.json();
     })
 }
@@ -54,11 +54,10 @@ login(user){
     console.log('login== user',user);
     let headers=new Headers;
     headers.append('Content-Type','application/json');
-    return this.http.post('https://cfe-candidate.herokuapp.com/users/authenticate',user,{headers:headers}) //JSON.stringify(user) = user
+    return this.http.post(this.apiUrl+'/users/authenticate',user,{headers:headers}) //JSON.stringify(user) = user
     .map((response:any) =>{
-    console.log('login response',response);    
-    
-        console.log(response.json().user)
+       console.log('login response',response);    
+       console.log(response.json().user)
         // localStorage.setItem('id_token',response.json().token);
         // localStorage.setItem('user',JSON.stringify(response.json().user));     
         window.localStorage.setItem('user', JSON.stringify(response.json().user));
@@ -67,7 +66,8 @@ login(user){
          this.authToken=response.json().token;
          return response.json();
           
-    }).catch((this._errorHandler))
+    })
+    // .catch((this._errorHandler))
 }
   onLogOut()
   {
@@ -75,7 +75,7 @@ login(user){
   // {
     // console.log(this.user);
     console.log("this.user");
-   return this.http.get("https://cfe-candidate.herokuapp.com/logout").map((response:Response)=>{  
+   return this.http.get("/logout").map((response:Response)=>{  
      console.log(response.json())
      window.localStorage.clear();     
      return response.json();

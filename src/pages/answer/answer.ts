@@ -28,6 +28,7 @@ marks:any;
   ionViewWillEnter() {
     let data =this.TestsProvider.getAnswer();
     this.answers=data.answers;
+    console.log(this.answers)
     this.marks=data.marks;
   }
   onStart(){

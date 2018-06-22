@@ -27,6 +27,10 @@ import {IonicStorageModule} from '@ionic/storage';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { AuthProvider } from '../providers/auth/auth';
 import { TestsProvider } from '../providers/tests/tests';
+import { CompletedPage } from '../pages/completed/completed';
+import { ResultPage } from '../pages/result/result';
+import { PractisestarttestPage } from '../pages/practisestarttest/practisestarttest';
+import { PractisePage } from '../pages/practise/practise';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { TestsProvider } from '../providers/tests/tests';
     IntroPage,
     SigninPage,
     RegisterPage,
-    TestsPage
+    TestsPage,
+    CompletedPage,
+    ResultPage,
+    PractisestarttestPage,
+    PractisePage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,11 @@ import { TestsProvider } from '../providers/tests/tests';
     IntroPage,
     SigninPage,
     RegisterPage,
-    TestsPage
+    TestsPage,
+    CompletedPage,
+    ResultPage,
+    PractisestarttestPage,
+    PractisePage
   ],
   providers: [
     StatusBar,

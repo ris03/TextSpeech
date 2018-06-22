@@ -16,7 +16,7 @@ import { TestsProvider } from '../../providers/tests/tests';
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  i:number;
+  i:number=0;
   j=0;
   ttstext:string=' ';
   ttstextmatch:string=' ';
@@ -31,8 +31,8 @@ export class AboutPage {
   selectedIndex;
   visible:boolean=false;
   ans=this.TestsProvider.getAnswer();
-  q=this.ans.length+1
-  w=this.ans.length1;
+  q:any
+  w:any
   status:boolean[]=[false,false,false,false];
   tno:number=0;
   // id = this.navParams.get('idd');
@@ -42,6 +42,8 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController,public tts: TextToSpeech,public speechRecognition: SpeechRecognition
           ,public viewController: ViewController,public TestsProvider:TestsProvider) {
+            this.q=this.ans.length+1
+            this.w=this.ans.length1;
   }
   ionViewWillEnter() {
     this.speechRecognition.hasPermission()
@@ -142,7 +144,9 @@ export class AboutPage {
   console.log('qqqqqq',qus)
   console.log(this.i)
   this.ques=qus.qustion[0].text;
-  this.i=qus.index;
+  this.i=qus.index+1;
+  console.log('i',this.i);
+  console.log('index',qus.index);
   this.options=qus.qustion[0].options;
   console.log(this.ques);
   // this.optionA=qus.options[0]
@@ -217,7 +221,36 @@ export class AboutPage {
         console.log(this.status)
       } 
       next(){
-        this.TestsProvider.setAnswer(1);
+        this.TestsProvider.setAnswer(this.options[0]);
         this.takeQuestion();
+        console.log('q',this.q)
+        console.log('w',this.w)
+      }
+      skip(){
+        this.TestsProvider.setAnswer('Not Answered');
+        if(this.i==9){
+          this.TestsProvider.saveAnswer().subscribe(()=>{
+
+          })
+  
+          // })       
+          this.navCtrl.setRoot(AnswerPage);
+          this.navCtrl.popToRoot();
+        } else {
+          this.takeQuestion();
+        }
+        console.log('q',this.q)
+        console.log('w',this.w)
+      }
+      onFinish(){
+        console.log('test finished')
+        this.TestsProvider.setAnswer(this.options[0]); 
+        this.TestsProvider.saveAnswer().subscribe(()=>{
+
+        })
+
+        // })       
+        this.navCtrl.setRoot(AnswerPage);
+        this.navCtrl.popToRoot();
       }
 }
