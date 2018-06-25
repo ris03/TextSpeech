@@ -12,14 +12,9 @@ import { Injectable } from '@angular/core';
 export class QuestionsProvider {
   index=0;
   marks=0;
-  testname:any;
-  category:any;
-  duration:any;
-  questions:any;
-  answer:any;
   answers:any[]=[];
   practisetests:any=[{
-  testname:'Test1',
+  testname:'Test 1',
   category:'General knowledge',
   duration:'5',  
   questions:[]=[
@@ -55,7 +50,7 @@ export class QuestionsProvider {
       }
     ]
   },{
-    testname:'Test2',
+    testname:'Test 2',
     category:'General knowledge',
     duration:'5',  
     questions:[]=[
@@ -91,7 +86,7 @@ export class QuestionsProvider {
         }
       ]
     },{
-      testname:'Test3',
+      testname:'Test 3',
       category:'General knowledge',
       duration:'5',  
       questions:[]=[
@@ -127,7 +122,7 @@ export class QuestionsProvider {
           }
         ]
       },{
-        testname:'Test4',
+        testname:'Test 4',
         category:'General knowledge',
         duration:'5',  
         questions:[]=[
@@ -163,7 +158,7 @@ export class QuestionsProvider {
             }
           ]
         },{
-          testname:'Test5',
+          testname:'Test 5',
           category:'General knowledge',
           duration:'5',  
           questions:[]=[
@@ -208,26 +203,26 @@ export class QuestionsProvider {
       console.log('get',this.index)
     }
   getQues(){
-    const onject = this.practisetests[this.index]
+    let onject = this.practisetests[this.index]
     console.log("-----------------",onject)
     return onject;
 
   }  
     setAnswer(answer:any){
-      // this.answers.push(answer);
-      // if(this.tests.questions[this.index].answer===answer){
-      //   this.marks+=1;
-      // }
-      // this.index++;
+      this.answers.push(answer);
+      if(this.practisetests.questions[this.index].answer===answer){
+        this.marks+=1;
+      }
+      this.index++;
   }
   getAnswer(){
-    // const data ={
-    //   marks:this.marks,
-    //   answers:this.answers,
-    //   length:this.answers.length,
-    //   length1:this.tests.questions.length
-    // };
-    // return data;
+    const data ={
+      marks:this.marks,
+      answers:this.answers,
+      length:this.answers.length,
+      length1:this.practisetests.questions.length
+    };
+    return data;
   }
 
 }

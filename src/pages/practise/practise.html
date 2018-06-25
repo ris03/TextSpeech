@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>practise</ion-title>
+  <ion-navbar color='navred'>
+    <ion-title>{{data.testname}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,11 +15,11 @@
 
 <ion-content padding>
       <!-- <h1>{{questionArray.testname}}</h1> -->
-      <div *ngFor='let ques of data.questions;let i = index' [ngClass]="{hide:quesIndex!=i}"> 
+       <div *ngFor='let ques of data.questions;let i = index' [ngClass]="{hide:quesIndex!=i}"> 
          <h4>{{ques.question}}</h4>
          <ul>
            <li *ngFor='let opt of ques.options'>{{opt}}</li>
          </ul>
       </div> 
-      <button ion-button (click)="onNext()" >next</button>
+      <button ion-button (click)="onNext()" >next</button> 
 </ion-content>
