@@ -1,12 +1,14 @@
 import { AnswerPage } from '../answer/answer';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { QuestionsProvider } from '../../providers/questions/questions';
+// import { QuestionsProvider } from '../../providers/questions/questions';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { Subscription } from 'rxjs/Subscription';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { timer } from 'rxjs/observable/timer';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { TestsProvider } from '../../providers/tests/tests';
+
 
 
 @Component({
@@ -14,31 +16,36 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  i:number;
+  i:number=0;
   j=0;
   ttstext:string=' ';
   ttstextmatch:string=' ';
   time=5;
   source = timer(0, 1000);
   ques:any[];
-  optionA:string=''
+  options:any[]=[]
   optionB:string=''
   optionC:string=''
   optionD:string=''
   selectedQuestion:any;
   selectedIndex;
   visible:boolean=false;
-  ans=this.qq.getAnswer();
-  q=this.ans.length+1
-  w=this.ans.length1;
-
+  ans=this.TestsProvider.getAnswer();
+  q:any
+  w:any
+  status:boolean[]=[false,false,false,false];
+  tno:number=0;
+  // id = this.navParams.get('idd');
 
 
   subscription: Subscription;
 
-  constructor(public navCtrl: NavController,public tts: TextToSpeech,public speechRecognition: SpeechRecognition,
-  public qq: QuestionsProvider,public viewController: ViewController) {
-
+  constructor(public navCtrl: NavController,public tts: TextToSpeech,public speechRecognition: SpeechRecognition
+          ,public viewController: ViewController,public TestsProvider:TestsProvider) {
+            this.q=this.ans.length+1
+            this.w=this.ans.length1;
+            console.log('q',this.q)
+            console.log('w',this.q)
   }
   ionViewWillEnter() {
     this.speechRecognition.hasPermission()
@@ -72,7 +79,9 @@ export class AboutPage {
             this.tts.speak('You selected option a')          
             .then(() => {
               this.ttstextmatch='option A';
-              this.qq.setAnswer(this.ttstextmatch);
+              this.status[0]=true;
+              this.tno++;
+              this.TestsProvider.setAnswer(0);
               // this.q++;
               // this.navCtrl.setRoot(AboutPage); 
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
@@ -83,8 +92,10 @@ export class AboutPage {
           } else if (this.ttstext === 'be' ||this.ttstext === 'b' ) {
             this.tts.speak('You selected option B')          
             .then(() => {
-              this.ttstextmatch='option B'
-              this.qq.setAnswer(this.ttstextmatch)              
+              this.ttstextmatch='option B';
+              this.status[1]=true;
+              this.tno++;
+              this.TestsProvider.setAnswer(1)              
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
               
               // this.takeQuestion();
@@ -93,8 +104,10 @@ export class AboutPage {
           } else if (this.ttstext === 'see' ||this.ttstext === 'she'||this.ttstext === 'c') {
             this.tts.speak('You selected option C')          
             .then(() => {
-              this.ttstextmatch='option C'
-              this.qq.setAnswer(this.ttstextmatch)              
+              this.ttstextmatch='option C';
+              this.status[2]=true;
+              this.tno++;
+              this.TestsProvider.setAnswer(2)              
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })                             
@@ -102,8 +115,10 @@ export class AboutPage {
           } else if (this.ttstext === 'de'||this.ttstext === 'd') {
             this.tts.speak('You selected option D')          
             .then(() => {
-              this.ttstextmatch='option D'
-              this.qq.setAnswer(this.ttstextmatch)              
+              this.ttstextmatch='option D';
+              this.status[3]=true;
+              this.tno++;
+              this.TestsProvider.setAnswer(3)
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })            
@@ -112,8 +127,9 @@ export class AboutPage {
             this.tts.speak('your selected option is Not available')          
             .then(() => {
               this.ttstextmatch='Option Not available'
-              this.qq.setAnswer(this.ttstextmatch)              
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);               
+              // this.qq.setAnswer(this.ttstextmatch)              
+              // this.navCtrl.setRoot(this.navCtrl.getActive().component);   
+              this.start();            
               // this.takeQuestion();
             }) 
             .catch((reason: any) => console.log(reason));
@@ -125,17 +141,21 @@ export class AboutPage {
   }
   takeQuestion(){
     // location.reload();
-  let qus = this.qq.getQues();
+  let qus = this.TestsProvider.getQues();
   this.time=5;
+  console.log('qqqqqq',qus)
   console.log(this.i)
-  this.ques=qus.qustion;
-  this.i=qus.index;
+  this.ques=qus.qustion[0].text;
+  this.i=qus.index+1;
+  console.log('i',this.i);
+  console.log('index',qus.index);
+  this.options=qus.qustion[0].options;
   console.log(this.ques);
   // this.optionA=qus.options[0]
   // this.optionB=qus.options[1]
   // this.optionC=qus.options[2]
   // this.optionD=qus.options[3]
-  this.read(qus.qustion);
+  this.read(qus.qustion[0].text);
     // this.i++;
   }
 
@@ -144,13 +164,13 @@ export class AboutPage {
    async read(TranslateText) : Promise<any> {
         try {
           await this.tts.speak({
-            text:TranslateText[0].question,
-            rate: 0.7
+            text:TranslateText,
+            rate: 1
           })
-          .then(()=> this.tts.speak('Option A,'+TranslateText[0].options[0]))
-          .then(()=> this.tts.speak('Option B '+TranslateText[0].options[1]))
-          .then(()=> this.tts.speak('Option Cd' +TranslateText[0].options[2]))
-          .then(()=> this.tts.speak('Option D' +TranslateText[0].options[3]))
+          .then(()=> this.tts.speak('Option A,' +this.options[0]))
+          .then(()=> this.tts.speak('Option B, '+this.options[1]))
+          .then(()=> this.tts.speak('Option C,' +this.options[2]))
+          .then(()=> this.tts.speak('Option D,' +this.options[3]))
           .then(()=>{
               this.timer()
           })
@@ -160,15 +180,15 @@ export class AboutPage {
           console.log(e);
         }
       }
-      increase(){
-        // this.j=0;
-        if(this.i===3){
-          this.i=0;
-        } else{
-          this.i++;
-        }
-        this.takeQuestion();
-      }
+      // increase(){
+      //   // this.j=0;
+      //   if(this.i===3){
+      //     this.i=0;
+      //   } else{
+      //     this.i++;
+      //   }
+      //   this.takeQuestion();
+      // }
       timer(){
         // while(this.time>0){
         //   this.time--;
@@ -182,14 +202,55 @@ export class AboutPage {
             this.start();
           }
         }
-
         )
       }
       onDone(){
-        this.navCtrl.setRoot(AnswerPage)
+        this.navCtrl.setRoot(AnswerPage);
         this.navCtrl.popToRoot();
       }
- 
-  
+      cClick(i){
+        if(this.tno===0){
+          this.status[i]=true;
+          this.tno++;
+        } else{
+          if(this.status[i]){
+            this.status[i]=false;
+            this.tno--;
+          } else {
+            this.status[i]=this.status[i];
+          }
+        }
+        console.log(this.status)
+      } 
+      next(){
+        this.TestsProvider.setAnswer(this.options[0]);
+        this.takeQuestion();
+        console.log('q',this.q)
+        console.log('w',this.w)
+      }
+      skip(){
+        this.TestsProvider.setAnswer('Not Answered');
+        if(this.i==9){
+          this.TestsProvider.saveAnswer().subscribe(()=>{
 
+          })
+          this.navCtrl.setRoot(AnswerPage);
+          this.navCtrl.popToRoot();
+        } else {
+          this.takeQuestion();
+        }
+        console.log('q',this.q)
+        console.log('w',this.w)
+      }
+      onFinish(){
+        console.log('test finished')
+        this.TestsProvider.setAnswer(this.options[0]); 
+        this.TestsProvider.saveAnswer().subscribe(()=>{
+
+        })
+
+        // })       
+        this.navCtrl.setRoot(AnswerPage);
+        this.navCtrl.popToRoot();
+      }
 }

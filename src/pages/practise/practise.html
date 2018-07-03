@@ -1,0 +1,53 @@
+<!--
+  Generated template for the PractisePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='navred'>
+    <ion-title>{{data.testname}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+      <!-- <h1>{{questionArray.testname}}</h1> -->
+      <div *ngIf='q<=w'> 
+
+        <h1>{{ques}}</h1>
+      <ion-item *ngFor='let opt of options; let i = index'>
+        <ion-label (click)='cClick(i)' *ngIf='status[i];else hhh' style="color:rgb(3, 85, 84)" >
+          {{opt}}
+          </ion-label>
+          <ng-template #hhh>
+            <ion-label  (click)='cClick(i)'>
+              {{opt}}
+            </ion-label>
+          </ng-template>
+       
+      </ion-item>
+      
+    </div>
+
+
+       <!-- <div *ngFor='let ques of data.questions;let i = index' [ngClass]="{hide:quesIndex!=i}"> 
+         <h4>{{ques.question}}</h4>
+         <ul>
+           <ion-label (click)='cClick(i)'>{{opt}}</ion-label>
+         </ul>
+      </div>  -->
+      <h2 *ngIf='q>w'>Test Finished</h2>
+<button outline *ngIf='q>w' class="btn" color="navred"  ion-button (click)="onDone()">View Result</button>
+<button outline *ngIf='w==i' class="btn" color="navred" (click)='onFinish()' ion-button>Finish Test</button>
+      
+        <!-- <h3>{{questions.length}}</h3> -->
+        <!-- <h3>{{questions.length}}</h3> -->
+        <button ion-button color='navred' outline (click)='takeQuestion()'>Repeat</button>
+        <button ion-button color='navred' outline (click)='next()'>Next</button>
+        <button ion-button color='navred' outline (click)='skip()'>Skip</button>
+        <!-- <button ion-button color='navred' outline (click)='ansew()'>Skip</button> -->
+
+</ion-content>

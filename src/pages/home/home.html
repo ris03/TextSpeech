@@ -1,36 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="navred" >
+    <ion-title style="padding-left:34%">u-Listen</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>with
-    This starter project comes  simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <button ion-button (click)="speak()">Convert</button> 
-  <button ion-button (click)="start()">Get Text</button> 
-  <!-- <button ion-button (click)="sayText()">Convert 1</button>  -->
-  
-  <ion-textarea [(ngModel)]='ttstext'>
  
-    </ion-textarea>
-    <ion-textarea [(ngModel)]='text'>
+<ion-content padding>
+<h2 style="text-align:center">Welcome to uListen</h2>
+<div style='padding-top:20%'>
+    <img src="assets/image1.png">
+</div>
+<br>
+<div style='padding-top:5%;padding-left:15%'>
+    <button center ion-button icon-start color="navred" (click)="signin()">
+        <ion-icon style="color:whitesmoke" name="star"></ion-icon>
+        <span style="color:w6ite"> Sign In </span>
+      </button>
+      <button ion-button icon-start outline color="navred" (click)="register()">
+        <ion-icon name="star">
 
-      </ion-textarea>
-  <!-- <ion-item>
-    <ion-label>
-      Text
-    </ion-label>
-    <ion-textarea [(ngModel)]="text">
 
-    </ion-textarea>
-  </ion-item>
-  <button ion-button (click)="sayText()">Convert</button> -->
+          
+        </ion-icon>
+        Register
+      </button>
+</div>
+
 </ion-content>

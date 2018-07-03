@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QuestionsProvider } from '../../providers/questions/questions';
+import { TabsPage } from '../tabs/tabs';
+import { TestsProvider } from '../../providers/tests/tests';
 
 /**
  * Generated class for the AnswerPage page.
@@ -17,18 +19,20 @@ import { QuestionsProvider } from '../../providers/questions/questions';
 export class AnswerPage{
 answers:any;
 marks:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public qq: QuestionsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public qq: QuestionsProvider,public TestsProvider:TestsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AnswerPage');
   }
-  ngOnInit() {
-    let data =this.qq.getAnswer();
+  ionViewWillEnter() {
+    let data =this.TestsProvider.getAnswer();
     this.answers=data.answers;
-    this.marks=data.marks
+    console.log(this.answers)
+    this.marks=data.marks;
   }
-  onD(){
+  onStart(){
+    this.navCtrl.setRoot(TabsPage);
     this.navCtrl.popToRoot();
   }
 }

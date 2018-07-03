@@ -1,0 +1,43 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="navred" hideBackButton>
+    <ion-title style="padding-left:38%">UListen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <h2 style="padding-left:38%">Sign-Up</h2>
+      <ion-item>
+        <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="person"></ion-icon><span>Name</span></ion-label>
+        <ion-input type="text" #name></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="mail"></ion-icon>E-mail</ion-label>
+          <ion-input type="email" #email></ion-input>
+        </ion-item>
+    
+      <ion-item>
+        <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="warning"></ion-icon>Password</ion-label>
+        <ion-input type="password" #password></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating><ion-icon color="navred"  style="padding-right:5px;font-size:3rem;" name="lock"></ion-icon>Confirm Password</ion-label>
+          <ion-input type="password" #cpassword></ion-input>
+        </ion-item>
+    
+    </ion-list>
+    
+    <div style="padding-left:34%">
+      <button color="navred" ion-button (click)="onRegister()">Register</button>
+    </div>
+    <h5 style="font-size:12px;padding-left:25%">Already have an account? <span (click)="onlogin()"style="color:rgb(3, 85, 84)">Log In</span></h5>
+</ion-content>

@@ -1,0 +1,39 @@
+<!--
+  Generated template for the PracCompPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='navred'>
+    <ion-title >Result</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor='let q of quess;let i=index'>
+    <h2>{{i+1}}. {{q.question}}</h2>
+    <h4>a. {{q.options[0]}}</h4>
+    <h4>b. {{q.options[1]}}</h4>
+    <h4>c. {{q.options[2]}}</h4>
+    <h4>d. {{q.options[3]}}</h4>
+    <h4>Answer: {{q.answer}}</h4>
+    <!-- <br> -->
+    <div *ngIf='q.answer === answers[i];else hhh'>
+      <h4 >Your Answer:  <span style="color:green">{{answers[i]}}</span></h4>
+    </div>
+    <ng-template #hhh>
+      <h4 >Your Answer:  
+        <span style="color:red">
+          {{answers[i]}}
+        </span>
+      </h4>
+    </ng-template>
+    <br><br>
+  </div>
+  <h2>Marks: {{marks}}</h2>
+  <button outline class="btn" color="navred"  ion-button (click)="onStart()">Go to start</button>
+</ion-content>

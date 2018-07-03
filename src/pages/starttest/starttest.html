@@ -4,19 +4,20 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
-  <ion-navbar color='danger'>
+  <ion-navbar color='navred'>
     <ion-title>Test Name</ion-title>
   </ion-navbar>
   <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet"> -->
-  <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
-</ion-header>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet"> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Noto+Serif" rel="stylesheet"> -->
+<!-- </ion-header>  -->
 
 
-<ion-content padding>
+<!-- <ion-content padding>
 <h1 bold >   Instructions </h1>
 <h4>1. All Questions are compulsory</h4>
 <h4>2. Test contains total of 10 questions.</h4>
@@ -26,10 +27,114 @@
 <h4>6. Make sure your microphone and speakers are in good working condition</h4>
 <h1>{{ttstext}}</h1>
 
-<button ion-button icon-start outline color="danger" (click)="onstart()">
+<button ion-button icon-start outline color="navred" (click)="onstart()">
   <ion-icon name="star"></ion-icon>
   Start Test
 </button>
 <!-- <button ion-button (click)="onstart()">Start Test</button>
 <button ion-button (click)="readInstruction()">Repeat Instructions</button> -->
-</ion-content>
+<!-- </ion-content> --> 
+
+
+<ion-header no-border>
+    <ion-navbar color="pageBack">
+      <ion-title>TEST Name</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+  <ion-content  (ionScroll)="onScrollCon($event)">
+    <div class="custom-card">
+      <ion-card-content>
+        <ion-row>
+          <ion-col text-center>
+            <div  class="circle-div div-small">
+              <div class="test-count">5</div>
+              <div class="test-display">Ques</div>
+            </div>
+          </ion-col>
+          <ion-col text-center>
+            <div class="circle-div div-big">
+              <img src="assets/imgs/auction.svg" dummyImage="assets/imgs/auction.svg">
+            </div>
+          </ion-col>
+          <ion-col text-center>
+            <div  class="circle-div div-small">
+              <div class="test-count">12</div>
+              <div class="test-display">Mins</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </div>
+    <ion-row>
+      <ion-col text-center>
+        <h2>INSTRUCTIONS</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Insone.svg">
+      </ion-col>
+      <ion-col>
+        <p>1.0 mark is awarded for correct attempts and 0.0 marks for incorrect attempts.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Instwo.svg">
+      </ion-col>
+      <ion-col>
+        <p>Tab on options or on radio button to select the correct answer.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Insthree.svg">
+      </ion-col>
+      <ion-col>
+        <p>Tap on CLEAR red button to deselect the answer</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Insone.svg">
+      </ion-col>
+      <ion-col>
+        <p>1.0 mark is awarded for correct attempts and 0.0 marks for incorrect attempts.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Instwo.svg">
+      </ion-col>
+      <ion-col>
+        <p>Tab on options or on radio button to select the correct answer.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ins-rows" text-left>
+      <ion-col col-2 class="icon-col">
+        <img class='ins-image' src="assets/imgs/Insthree.svg">
+      </ion-col>
+      <ion-col>
+        <p>Tap on CLEAR red button to deselect the answer</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-left>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-checkbox color="primary" [checked]="confirmation" (click)="onConfirmation()"></ion-checkbox>
+          <ion-label>I have read the instructions carefully</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button class="ins-btn-cancel" ion-button block outline color="danger">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button class="ins-btn-confirm" (click)="onstart()" color="primary" ion-button block [disabled]="!confirmation">Proceed</button>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  

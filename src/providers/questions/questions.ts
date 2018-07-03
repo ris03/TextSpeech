@@ -12,93 +12,233 @@ import { Injectable } from '@angular/core';
 export class QuestionsProvider {
   index=0;
   marks=0;
-
+  qIndex=0;
   answers:any[]=[];
-  questions:any []=[
+  practisetests:any=[{
+  testname:'Test 1',
+  category:'General knowledge',
+  duration:'5',  
+  ques:[]=[
       {
-        question: 'Who let the dogs out ?',
+        question: 'Which one of these is the national Anthem of India ?',
         options :[
-          'Oreo',
-          'Maxxy',
-          'Bruno',
+          'Vande Matram',
+          'Jai Ho',
+          'Jaane Gaane Maane.......',
           'None of the above'
       ],
-      answer:'option A'
+  answer:'Jaane Gaane Maane.......'
     },
       {
-        question: 'Who is Chanakya Sethi ?',
+        question: 'Who is the Prime Minister of India ?',
         options :[
-          'Best coder',
-          'Awesome',
-          'Too good to be true',
-          'All of the above'
+          'Rahul Gandhi',
+          'Lallu Prasad',
+          'Arvind Kejriwal',
+          'Narendra Modi'
         ],
-        answer: 'option B'
+        answer: 'Narendra Modi'
       },
       {
-        question: 'Who is Chintu ?',
+        question: 'When is the next cricket 50-50 WC?',
         options :[
-          'Best coder',
-          'Awesome',
-          'Too good to be true',
-          'None of the above'
+          '2019',
+          '2020 ',
+          '2021',
+          '2022'
         ],
-        answer:'option C'
-      },
-      // {
-      //   question: 'Who is Khushal ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // },
-      // {
-      //   question: 'Who is Rishi ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // },
-      // {
-      //   question: 'Who is Priyanka ?',
-      //   options :[
-      //     'Best coder',
-      //     'Awesome',
-      //     'Too good to be true',
-      //     'None of the above'
-      //   ]
-      // }
+        answer:'2019'
+      }
     ]
-  
+  },{
+    testname:'Test 2',
+    category:'General knowledge',
+    duration:'5',  
+    ques:[]=[
+        {
+          question: 'Which one of these is the national Anthem of India ?',
+          options :[
+            'Vande Matram',
+            'Jai Ho',
+            'Jaane Gaane Maane.......',
+            'None of the above'
+        ],
+    answer:'Jaane Gaane Maane.......'
+      },
+        {
+          question: 'Who is the Prime Minister of India ?',
+          options :[
+            'Rahul Gandhi',
+            'Lallu Prasad',
+            'Arvind Kejriwal',
+            'Narendra Modi'
+          ],
+          answer: 'Narendra Modi'
+        },
+        {
+          question: 'When is the next cricket 50-50 WC?',
+          options :[
+            '2019',
+            '2020 ',
+            '2021',
+            '2022'
+          ],
+          answer:'2019'
+        }
+      ]
+    },{
+      testname:'Test 3',
+      category:'General knowledge',
+      duration:'5',  
+      ques:[]=[
+          {
+            question: 'Which one of these is the national Anthem of India ?',
+            options :[
+              'Vande Matram',
+              'Jai Ho',
+              'Jaane Gaane Maane.......',
+              'None of the above'
+          ],
+      answer:'Jaane Gaane Maane.......'
+        },
+          {
+            question: 'Who is the Prime Minister of India ?',
+            options :[
+              'Rahul Gandhi',
+              'Lallu Prasad',
+              'Arvind Kejriwal',
+              'Narendra Modi'
+            ],
+            answer: 'Narendra Modi'
+          },
+          {
+            question: 'When is the next cricket 50-50 WC?',
+            options :[
+              '2019',
+              '2020 ',
+              '2021',
+              '2022'
+            ],
+            answer:'2019'
+          }
+        ]
+      },{
+        testname:'Test 4',
+        category:'General knowledge',
+        duration:'5',  
+        ques:[]=[
+            {
+              question: 'Which one of these is the national Anthem of India ?',
+              options :[
+                'Vande Matram',
+                'Jai Ho',
+                'Jaane Gaane Maane.......',
+                'None of the above'
+            ],
+        answer:'Jaane Gaane Maane.......'
+          },
+            {
+              question: 'Who is the Prime Minister of India ?',
+              options :[
+                'Rahul Gandhi',
+                'Lallu Prasad',
+                'Arvind Kejriwal',
+                'Narendra Modi'
+              ],
+              answer: 'Narendra Modi'
+            },
+            {
+              question: 'When is the next cricket 50-50 WC?',
+              options :[
+                '2019',
+                '2020 ',
+                '2021',
+                '2022'
+              ],
+              answer:'2019'
+            }
+          ]
+        },{
+          testname:'Test 5',
+          category:'General knowledge',
+          duration:'5',  
+          ques:[]=[
+              {
+                question: 'Which one of these is the national Anthem of India ?',
+                options :[
+                  'Vande Matram',
+                  'Jai Ho',
+                  'Jaane Gaane Maane.......',
+                  'None of the above'
+              ],
+          answer:'Jaane Gaane Maane.......'
+            },
+              {
+                question: 'Who is the Prime Minister of India ?',
+                options :[
+                  'Rahul Gandhi',
+                  'Lallu Prasad',
+                  'Arvind Kejriwal',
+                  'Narendra Modi'
+                ],
+                answer: 'Narendra Modi'
+              },
+              {
+                question: 'When is the next cricket 50-50 WC?',
+                options :[
+                  '2019',
+                  '2020 ',
+                  '2021',
+                  '2022'
+                ],
+                answer:'2019'
+              }
+            ]
+          }
+  ]
   constructor(public http: Http) {
     console.log('Hello QuestionsProvider Provider');
   }
-  getQues(){
-    // if(index<this.questions.length){
-      // let i = this.index;
-      // this.index++;
-      let qq = this.questions[this.index];
-      return {qustion:[qq],index:this.index};
-      // }
+  get(i){
+      this.index=i;
+      this.answers=[];
+      this.marks=0;
+      this.qIndex=0;
+      console.log('get',this.index)
     }
-    setAnswer(answer:any){
-      this.answers.push(answer);
-      if(this.questions[this.index].answer===answer){
+  getQues(){
+    
+    // this.index=0;
+    console.log('get',this.index)    
+    let object = this.practisetests[this.index].ques[this.qIndex];
+    console.log("@@@@@@@@@@@@@@@@@@@@",object)
+    // this.qIndex++;
+    return {obj:object,index:this.qIndex};
+
+  }  
+   
+  setAnswer(answer:any){
+    console.log(answer)
+    console.log(this.index)
+    console.log(this.practisetests[this.index].ques[this.qIndex].answer)
+    let aa ={
+      q:this.practisetests[this.index].ques[this.qIndex],
+      a:answer
+    }
+    this.answers.push(aa);
+      if(this.practisetests[this.index].ques[this.qIndex].answer===answer){
         this.marks+=1;
       }
-      this.index++;
+      this.qIndex++;
   }
   getAnswer(){
     const data ={
       marks:this.marks,
       answers:this.answers,
       length:this.answers.length,
-      length1:this.questions.length
+      length1:this.practisetests[this.index].ques.length
     };
+    console.log(data);
     return data;
   }
 

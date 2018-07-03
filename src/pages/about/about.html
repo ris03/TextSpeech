@@ -1,7 +1,7 @@
 <ion-header hideBackButton>
-  <ion-navbar color="danger" hideBackButton>
+  <ion-navbar color="navred" hideBackButton>
     <ion-title style="padding:0 10px">
-      <span float-left>Ques.{{q}}</span> <span float-right >00:0{{time}}
+      <span float-left>Ques.{{i}}</span> <span float-right >00:0{{time}}
       </span>
     </ion-title>
   </ion-navbar>
@@ -19,39 +19,31 @@
     <h4>B. {{optionB}}</h4>
     <h4>C. {{optionC}}</h4>
     <h4>D. {{optionD}}</h4> -->
-<div *ngFor="let que of ques;let i=index"> 
+<div> 
 
-    <h1 *ngIf='q<=w'>{{que.question}}</h1>
-  <ion-item *ngFor='let opt of que.options'>
-    <ion-label >
+    <h1 *ngIf='q<=w'>{{ques}}</h1>
+  <ion-item *ngFor='let opt of options; let i = index'>
+    <ion-label (click)='cClick(i)' *ngIf='status[i];else hhh' style="color:rgb(3, 85, 84)" >
       {{opt}}
       </ion-label>
-    <ion-checkbox color="danger"></ion-checkbox>
+      <ng-template #hhh>
+        <ion-label  (click)='cClick(i)'>
+          {{opt}}
+        </ion-label>
+      </ng-template>
+   
   </ion-item>
-
-
-   <!-- <h1 *ngIf='q<=w'>{{que.question}}</h1>
-  <h4 *ngIf='que.question'>a. {{que.options[0]}}</h4>
-  <h4 *ngIf='que.question'>b. {{que.options[1]}}</h4>
-  <h4 *ngIf='que.question'>c. {{que.options[2]}}</h4>
-  <h4 *ngIf='que.question'>d. {{que.options[3]}}</h4> -->
-  <!-- <h2 *ngIf='que.question'>time: {{time}}</h2> -->
-  <!-- <ion-card *ngFor="let que of ques;let i=index">
-    <ion-card-header class="queS" *ngIf='q<=w'>
-      {{que.question}}
-    </ion-card-header >
-    <ion-card-content class="optn" *ngFor='let opt of que.options'>
-      a. {{opt}}
-    </ion-card-content>
-  </ion-card> -->
   
 </div>
 <h2 *ngIf='q>w'>Test Finished</h2>
-<button outline *ngIf='q>w' class="btn btn-danger"  ion-button (click)="onDone()">View Result</button>
+<button outline *ngIf='q>w' class="btn" color="navred"  ion-button (click)="onDone()">View Result</button>
+<button outline *ngIf='w==i' class="btn" color="navred" (click)='onFinish()' ion-button>Finish Test</button>
 
   <!-- <h3>{{questions.length}}</h3> -->
   <!-- <h3>{{questions.length}}</h3> -->
-  <button ion-button color='danger' outline (click)='takeQuestion()'> Show Question</button>
-
+  <button ion-button color='navred' outline (click)='takeQuestion()'>Repeat</button>
+  <button ion-button color='navred' outline (click)='next()'>Next</button>
+  <button ion-button color='navred' outline (click)='skip()'>Skip</button>
+  
   
 </ion-content>

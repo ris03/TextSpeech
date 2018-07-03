@@ -6,17 +6,20 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>answer</ion-title>
+  <ion-navbar color='navred'>
+    <ion-title>Your Result</ion-title>
   </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300" rel="stylesheet">
 
 </ion-header>
-
+ 
 
 <ion-content padding>
 <h2>Answers:</h2>
-<div *ngFor="let answer of answers;let i=index">
+<!-- <div *ngFor="let answer of answers;let i=index">
   <h4>Question {{i+1}}: {{answer}}</h4>
-</div>
+</div> -->
 <h2>Marks: {{marks}}</h2>
+<br><br>
+<button outline class="btn" color="navred"  ion-button (click)="onStart()">Go to start</button>
 </ion-content>
