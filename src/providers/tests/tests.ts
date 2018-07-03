@@ -28,8 +28,8 @@ export class TestsProvider implements OnInit {
     answers:any[]=[];
     category:any
     testname:any
-    // apiUrl: string = 'https://cfe-candidate.herokuapp.com';
-    apiUrl: string = 'http://localhost:4000';
+    apiUrl: string = 'https://candidate-cfe.herokuapp.com';
+    // apiUrl: string = 'http://localhost:4000';
 
     constructor(private http: Http,private userService: AuthProvider
     ) {

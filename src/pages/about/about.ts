@@ -44,6 +44,8 @@ export class AboutPage {
           ,public viewController: ViewController,public TestsProvider:TestsProvider) {
             this.q=this.ans.length+1
             this.w=this.ans.length1;
+            console.log('q',this.q)
+            console.log('w',this.q)
   }
   ionViewWillEnter() {
     this.speechRecognition.hasPermission()
@@ -232,8 +234,6 @@ export class AboutPage {
           this.TestsProvider.saveAnswer().subscribe(()=>{
 
           })
-  
-          // })       
           this.navCtrl.setRoot(AnswerPage);
           this.navCtrl.popToRoot();
         } else {

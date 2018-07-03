@@ -13,8 +13,8 @@ import { Observable } from 'rxjs/Rx';
 */
 @Injectable()
 export class AuthProvider {
-// apiUrl: string = 'https://cfe-candidate.herokuapp.com';
-apiUrl: string = 'http://localhost:4000';
+apiUrl: string = 'https://candidate-cfe.herokuapp.com';
+// apiUrl: string = 'http://localhost:4000';
   public user:any;
   public authToken:any;
   constructor(public http: Http, public alertCtrl: AlertController
@@ -75,15 +75,15 @@ login(user){
   // {
     // console.log(this.user);
     console.log("this.user");
-   return this.http.get("/logout").map((response:Response)=>{  
-     console.log(response.json())
+  //  return this.http.get(this.apiUrl+"/logout").map((response:Response)=>{  
+    //  console.log(response.json())
      window.localStorage.clear();     
-     return response.json();
+     return true;
       // this.user=undefined;
       // this.authToken=undefined;
       // localStorage.clear();
       // this.navCtrl.popToRoot();
-      });
+      // });
     }
 
 

@@ -31,6 +31,7 @@ import { CompletedPage } from '../pages/completed/completed';
 import { ResultPage } from '../pages/result/result';
 import { PractisestarttestPage } from '../pages/practisestarttest/practisestarttest';
 import { PractisePage } from '../pages/practise/practise';
+import { PracCompPage } from '../pages/prac-comp/prac-comp';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PractisePage } from '../pages/practise/practise';
     CompletedPage,
     ResultPage,
     PractisestarttestPage,
-    PractisePage
+    PractisePage,
+    PracCompPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,9 @@ import { PractisePage } from '../pages/practise/practise';
     CompletedPage,
     ResultPage,
     PractisestarttestPage,
-    PractisePage
+    PractisePage,
+    PracCompPage
+    
   ],
   providers: [
     StatusBar,

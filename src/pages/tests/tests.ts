@@ -4,6 +4,8 @@ import { TestsProvider } from '../../providers/tests/tests';
 import { StarttestPage } from '../starttest/starttest';
 import { QuestionsProvider } from '../../providers/questions/questions';
 import { PractisestarttestPage } from '../practisestarttest/practisestarttest';
+import { AuthProvider } from '../../providers/auth/auth';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the TestsPage page.
@@ -28,7 +30,8 @@ export class TestsPage {
   practiseTests:any[]=[];
   x=this.QuestionsProvider.practisetests;
   constructor(public navCtrl: NavController, public navParams: NavParams,private testService: TestsProvider,
-    private ldCtrl: LoadingController,public app: App,public QuestionsProvider:QuestionsProvider
+    private ldCtrl: LoadingController,public app: App,public QuestionsProvider:QuestionsProvider,
+    public auth:AuthProvider
 ) {
   }
 
@@ -79,6 +82,11 @@ export class TestsPage {
    console.log(i);
    this.QuestionsProvider.get(i);
    this.app.getRootNav().setRoot(PractisestarttestPage);   
+  }
+  onLogout(){
+    this.auth.onLogOut()
+   this.app.getRootNav().setRoot(HomePage);   
+     
   }
 
 }

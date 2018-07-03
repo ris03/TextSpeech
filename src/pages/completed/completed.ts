@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController,App} from 'ionic-angular';
 import { TestsProvider } from '../../providers/tests/tests';
 import { ResultPage } from '../../pages/result/result';
+import { AuthProvider } from '../../providers/auth/auth';
+import { HomePage } from '../home/home';
 
 
 
@@ -28,7 +30,8 @@ export class CompletedPage {
   filteredcompletedTests: any[] = [];
   data1:any;
 
-  constructor(public app: App,public navCtrl: NavController, public navParams: NavParams,public TestsProvider:TestsProvider,private ldCtrl: LoadingController,) {
+  constructor(public app: App,public navCtrl: NavController, public navParams: NavParams,
+      public TestsProvider:TestsProvider,private ldCtrl: LoadingController, public auth:AuthProvider) {
   }
 
   ionViewWillEnter() {
@@ -76,6 +79,12 @@ export class CompletedPage {
         })
       }
     )
+  }
+  onLogout(){
+    this.auth.onLogOut()
+    this.app.getRootNav().setRoot(HomePage);   
+
+      
   }
 }
 

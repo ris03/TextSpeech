@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform,App } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { AboutPage } from '../about/about';
+import { AuthProvider } from '../../providers/auth/auth';
+import { HomePage } from '../home/home';
 // import { BackgroundMode } from '@ionic-native/background-mode';
 
 /**
@@ -19,7 +21,8 @@ import { AboutPage } from '../about/about';
 })
 export class PracticeTestPage {
   text:string='';
-  constructor(public navCtrl: NavController, public navParams: NavParams,public tts: TextToSpeech,public speechRecognition: SpeechRecognition) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
+    public tts: TextToSpeech,public speechRecognition: SpeechRecognition,public auth:AuthProvider) {
   }
   ionViewWillLoad() {
     // this.tts.stop();
@@ -46,6 +49,13 @@ export class PracticeTestPage {
           this.speechRecognition.stopListening();
           this.navCtrl.push(AboutPage)
         }})
+        }
+        onLogout(){
+          console.log('logout')
+          this.auth.onLogOut()
+            // this.navCtrl.setRoot(HomePage);
+            //   this.navCtrl.popToRoot();
+            this.app.getRootNav().setRoot(HomePage);
         }
   // private mic_off: any = {
   //   icon: 'mic',
