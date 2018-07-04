@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,LoadingController,ToastController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
@@ -19,7 +19,7 @@ import { RegisterPage } from '../register/register';
 export class SigninPage {
   @ViewChild('username') username;
   @ViewChild('password') password;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private auth:AuthProvider, public alertCtrl: AlertController) {
+  constructor(public loader: LoadingController,public toast: ToastController,public navCtrl: NavController, public navParams: NavParams,private auth:AuthProvider, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -37,6 +37,11 @@ export class SigninPage {
       this.alert('Please fill in the details');      
     }
     else {
+      let loading = this.loader.create({
+        spinner: 'bubbles',
+        duration: 1000
+      });
+      loading.present();
       const user = {
         email: this.username.value,
         password: this.password.value
@@ -54,11 +59,25 @@ export class SigninPage {
               } else {
               this.alert(user.msg);                
               }
+        },
+        (error)=>{
+          let e=error.json();
+          console.log(e);          
+          console.log(e.msg);
+          console.log(error);
+          loading.dismiss();
+          this.toaster(e.msg);    
         }
       )
     }
   }
   oncreate(){
     this.navCtrl.push(RegisterPage)
+  }
+  toaster(message: string) {
+    this.toast.create({
+      message: message,
+      duration: 3000
+    }).present();
   }
 }

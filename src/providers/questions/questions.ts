@@ -73,7 +73,7 @@ export class QuestionsProvider {
             'Arvind Kejriwal',
             'Narendra Modi'
           ],
-          answer: 'Narendra Modi'
+          answer:'Narendra Modi'
         },
         {
           question: 'When is the next cricket 50-50 WC?',

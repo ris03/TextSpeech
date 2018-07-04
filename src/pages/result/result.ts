@@ -16,19 +16,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ResultPage {
   ans:any
   ques:any
+  k=0;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(this.navParams.get('userResponse'))
+    console.log("UserResponse",this.navParams.get('userResponse'))
     this.ans=this.navParams.get('userResponse').answers;
-    console.log(this.navParams.get('questionData'))
+    console.log("QuestionsData",this.navParams.get('questionData'))
     this.ques=this.navParams.get('questionData')
     // console.log(this.ques.options);
     this.ques.forEach(element => {
-      console.log(element.options)
+      console.log("1",element.options)
     });
+    for(let j=0;j<this.ques.length;j++){
+     if(this.ques[j].options[this.ques[j].answer] === this.ans[j]){
+        this.k++;
+        console.log("ify",this.ques[j].answer)
+        
+     } 
+    console.log(this.ques[j].options[this.ques[j].answer])
+     console.log(this.ans[j])
+    console.log(this.ques[j].text)
+    console.log(this.ques[j]._id)
+    }
+    console.log("value of k",this.k)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResultPage');
   }
+
+ 
+
+
 
 }

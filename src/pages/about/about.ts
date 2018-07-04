@@ -81,7 +81,7 @@ export class AboutPage {
               this.ttstextmatch='option A';
               this.status[0]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(0);
+              this.TestsProvider.setAnswer(this.options[0]);
               // this.q++;
               // this.navCtrl.setRoot(AboutPage); 
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
@@ -95,7 +95,7 @@ export class AboutPage {
               this.ttstextmatch='option B';
               this.status[1]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(1)              
+              this.TestsProvider.setAnswer(this.options[1])              
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
               
               // this.takeQuestion();
@@ -107,7 +107,7 @@ export class AboutPage {
               this.ttstextmatch='option C';
               this.status[2]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(2)              
+              this.TestsProvider.setAnswer(this.options[2])              
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })                             
@@ -118,21 +118,13 @@ export class AboutPage {
               this.ttstextmatch='option D';
               this.status[3]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(3)
+              this.TestsProvider.setAnswer(this.options[3])
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })            
             .catch((reason: any) => console.log(reason));
-          } else {
-            this.tts.speak('your selected option is Not available')          
-            .then(() => {
-              this.ttstextmatch='Option Not available'
-              // this.qq.setAnswer(this.ttstextmatch)              
-              // this.navCtrl.setRoot(this.navCtrl.getActive().component);   
-              this.start();            
-              // this.takeQuestion();
-            }) 
-            .catch((reason: any) => console.log(reason));
+          } else if(this.ttstext === 'skip') {
+              this.skip();
           }
         },
         (onerror) => console.log('error:', onerror)
@@ -171,6 +163,7 @@ export class AboutPage {
           .then(()=> this.tts.speak('Option B, '+this.options[1]))
           .then(()=> this.tts.speak('Option C,' +this.options[2]))
           .then(()=> this.tts.speak('Option D,' +this.options[3]))
+          .then(()=> this.tts.speak('to skip the question, say skip'))
           .then(()=>{
               this.timer()
           })
@@ -205,6 +198,11 @@ export class AboutPage {
         )
       }
       onDone(){
+        console.log('test finished')
+        // this.TestsProvider.setAnswer(this.options[0]); 
+        this.TestsProvider.saveAnswer().subscribe(()=>{
+
+        })
         this.navCtrl.setRoot(AnswerPage);
         this.navCtrl.popToRoot();
       }

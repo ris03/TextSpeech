@@ -180,7 +180,7 @@ export class TestsProvider implements OnInit {
         // }
         this.answers.push(answer);
         console.log('array'+this.answers)
-        if(this.questions[this.index].answer===answer){
+        if(this.questions[this.index].options[this.questions[this.index].answer]===answer){
           this.marks+=1;
           console.log(this.marks)
         }
