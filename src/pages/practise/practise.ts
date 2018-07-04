@@ -243,7 +243,7 @@ export class PractisePage implements OnInit {
   }
   onFinish(){
     console.log('test finished')
-    // this.QuestionsProvider.setAnswer(this.options[0]);       
+    this.QuestionsProvider.setAnswer(this.options[0]);       
     this.navCtrl.setRoot(PracCompPage);
     this.navCtrl.popToRoot();
   }

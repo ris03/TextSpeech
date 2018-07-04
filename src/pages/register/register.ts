@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { App,IonicPage, NavController, NavParams,AlertController ,LoadingController,ToastController} from 'ionic-angular';
 import { SigninPage } from '../signin/signin';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -22,8 +22,8 @@ export class RegisterPage {
   @ViewChild('password') password
   @ViewChild('cpassword') cpassword
   // tab:Tabs;
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    private sService: AuthProvider,public alertCtrl: AlertController
+  constructor(public app:App,public navCtrl: NavController, public navParams: NavParams, 
+    private sService: AuthProvider,public alertCtrl: AlertController,public loader: LoadingController,public toast: ToastController
   ) {
   // this.tab=navCtrl.parent;    
   }
@@ -44,6 +44,11 @@ export class RegisterPage {
       if(this.cpassword.value !== this.password.value){
       this.alert('Passwords don\'t match!')        
       } else {
+        let loading = this.loader.create({
+          spinner: 'bubbles',
+          duration: 1000
+        });
+        loading.present();
         const user ={
           name:this.name.value,
           email:this.email.value,
@@ -53,15 +58,21 @@ export class RegisterPage {
           (user)=>{
             console.log('userrr',user)
             if(user.success){
+              this.toaster(user.msg);
+              // this.app.getRootNav().setRoot(SigninPage);
+
+              loading.dismiss();      
               console.log('signed up user',user);
-              this.alert('You are registered!')          
-              this.navCtrl.push(SigninPage);    
+              // this.alert('You are registered!')          
             } else {
               this.alert(user.msg)                        
             }
+            this.navCtrl.push(SigninPage);  
           },     
           (error)=>{
             console.log(error);
+            loading.dismiss();
+            this.toaster(error);    
           }
         )
       }
@@ -70,5 +81,10 @@ export class RegisterPage {
   onlogin(){
     this.navCtrl.push(SigninPage);
   }
-
+  toaster(message: string) {
+    this.toast.create({
+      message: message,
+      duration: 3000
+    }).present();
+  }
 }

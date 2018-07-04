@@ -14,6 +14,9 @@
 
 
 <ion-content padding>
+  <div>
+     <h1>Your Score{{k}}</h1>
+  </div>
   <div *ngFor='let q of ques;let i=index'>
     <h2>{{i+1}}. {{q.text}}</h2>
     <h4>a. {{q.options[0]}}</h4>

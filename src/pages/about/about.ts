@@ -123,16 +123,8 @@ export class AboutPage {
               // this.takeQuestion();
             })            
             .catch((reason: any) => console.log(reason));
-          } else {
-            this.tts.speak('your selected option is Not available')          
-            .then(() => {
-              this.ttstextmatch='Option Not available'
-              // this.qq.setAnswer(this.ttstextmatch)              
-              // this.navCtrl.setRoot(this.navCtrl.getActive().component);   
-              this.start();            
-              // this.takeQuestion();
-            }) 
-            .catch((reason: any) => console.log(reason));
+          } else if(this.ttstext === 'skip') {
+              this.skip();
           }
         },
         (onerror) => console.log('error:', onerror)
@@ -171,6 +163,7 @@ export class AboutPage {
           .then(()=> this.tts.speak('Option B, '+this.options[1]))
           .then(()=> this.tts.speak('Option C,' +this.options[2]))
           .then(()=> this.tts.speak('Option D,' +this.options[3]))
+          .then(()=> this.tts.speak('to skip the question, say skip'))
           .then(()=>{
               this.timer()
           })
@@ -205,6 +198,11 @@ export class AboutPage {
         )
       }
       onDone(){
+        console.log('test finished')
+        // this.TestsProvider.setAnswer(this.options[0]); 
+        this.TestsProvider.saveAnswer().subscribe(()=>{
+
+        })
         this.navCtrl.setRoot(AnswerPage);
         this.navCtrl.popToRoot();
       }
