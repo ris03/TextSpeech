@@ -7,15 +7,15 @@
 <ion-header>
 
   <ion-navbar color="navred" hideBackButton>
-    <ion-title>uListen</ion-title>
+    <ion-title style="text-align:center">uListen</ion-title>
   </ion-navbar>
-
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Serif" rel="stylesheet">
 </ion-header>
 
 
 <ion-content padding>
   <ion-list>
-    <h2 style="padding-left:38%">Sign-In</h2>
+    <h2 style="text-align:center">Sign-In</h2>
     <ion-item>
       <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="mail"></ion-icon>E-mail</ion-label>
       <ion-input type="text" #username></ion-input>
@@ -28,8 +28,8 @@
   
   </ion-list>
   
-  <div style="padding-left:34%">
+  <div style="text-align:center">
     <button color="navred" ion-button (click)="signIn()">Sign In</button>
   </div>
-  <h5 style="font-size:12px;padding-left:25%">Create new account!! <span (click)="oncreate()" style="color:rgb(3, 85, 84)">Sign up</span></h5>
+  <h5 style="font-size:12px;text-align:center">Create new account!! <span (click)="oncreate()" style="color:rgb(3, 85, 84)">Sign up</span></h5>
 </ion-content>

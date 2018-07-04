@@ -81,7 +81,7 @@ export class AboutPage {
               this.ttstextmatch='option A';
               this.status[0]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(0);
+              this.TestsProvider.setAnswer(this.options[0]);
               // this.q++;
               // this.navCtrl.setRoot(AboutPage); 
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
@@ -95,7 +95,7 @@ export class AboutPage {
               this.ttstextmatch='option B';
               this.status[1]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(1)              
+              this.TestsProvider.setAnswer(this.options[1])              
               this.navCtrl.setRoot(this.navCtrl.getActive().component); 
               
               // this.takeQuestion();
@@ -107,7 +107,7 @@ export class AboutPage {
               this.ttstextmatch='option C';
               this.status[2]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(2)              
+              this.TestsProvider.setAnswer(this.options[2])              
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })                             
@@ -118,7 +118,7 @@ export class AboutPage {
               this.ttstextmatch='option D';
               this.status[3]=true;
               this.tno++;
-              this.TestsProvider.setAnswer(3)
+              this.TestsProvider.setAnswer(this.options[3])
               this.navCtrl.setRoot(this.navCtrl.getActive().component);               
               // this.takeQuestion();
             })            
