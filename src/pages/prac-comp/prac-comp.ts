@@ -22,10 +22,8 @@ export class PracCompPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public ques: QuestionsProvider) {
   }
 
+  
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PracCompPage');
-  }
-  ionViewWillEnter() {
     let data =this.ques.getAnswer();
     // this.answers=data.answers;
     // console.log(data)

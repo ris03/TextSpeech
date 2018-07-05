@@ -47,7 +47,7 @@ export class AboutPage {
             console.log('q',this.q)
             console.log('w',this.q)
   }
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.speechRecognition.hasPermission()
       .then((hasPermission: boolean) => {
   

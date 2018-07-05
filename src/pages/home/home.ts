@@ -26,8 +26,6 @@ export class HomePage {
     this.tts.speak('Welcome to uListen');
   }
 
-  ngOnInit(){}
-
   signin(){
     this.navCtrl.push(SigninPage)
   }

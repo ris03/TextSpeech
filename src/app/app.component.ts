@@ -23,18 +23,22 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private storage: Storage) {
     platform.ready().then(() => {
-      this.storage.get('introShown').then((result) => {
- 
-        if(result){
-          this.rootPage = HomePage;
+      this.storage.get('token').then((token)=>{
+        if(token){
+          this.rootPage = TabsPage;
         } else {
-          this.rootPage = IntroPage;
-          this.storage.set('introShown', true);
+          this.storage.get('introShown').then((result) => {
+            if(result){
+              this.rootPage = HomePage;
+            } else {
+              this.rootPage = IntroPage;
+              this.storage.set('introShown', true);
+            }
+            // this.loader.dismiss();
+          });
         }
- 
-        // this.loader.dismiss();
- 
-      });
+      })
+      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();

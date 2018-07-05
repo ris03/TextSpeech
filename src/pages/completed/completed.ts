@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController,App} from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController,App,AlertController} from 'ionic-angular';
 import { TestsProvider } from '../../providers/tests/tests';
 import { ResultPage } from '../../pages/result/result';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -31,39 +31,41 @@ export class CompletedPage {
   data1:any;
 
   constructor(public app: App,public navCtrl: NavController, public navParams: NavParams,
-      public TestsProvider:TestsProvider,private ldCtrl: LoadingController, public auth:AuthProvider) {
+      public TestsProvider:TestsProvider,private ldCtrl: LoadingController, public auth:AuthProvider,public alertCtrl: AlertController) {
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     console.log('ionViewDidLoad CompletedPage');
-    this.TestsProvider.getresult().subscribe(
-      (res)=>{
-        this.data1=res;
-        console.log(this.data1); 
-      })  
+      
       let loader = this.ldCtrl.create({
         spinner: 'crescent'
-      });
+      }); 
       loader.present();
-      this.TestsProvider.getAllTests().then((testsData: { assignedTest: any[], completedTest: any[] }) => {
-        this.tests = testsData.assignedTest;
-        console.log(testsData.assignedTest)
-        console.log('111111111111111111111'+JSON.stringify(testsData))
-        // this.filteredTests = testsData.assignedTest;
-        this.completedTests = testsData.completedTest;
-        console.log(testsData.completedTest)
-        // this.filteredcompletedTests = testsData.completedTest;
-        this.reload = false;
-        loader.dismiss();
-  
-      }).catch((err) => {
-        loader.dismiss();
-        loader.onDidDismiss(() => {
-          // this.toastCreator('Unable to load Tests. Please try again.');
-          this.reload = true;
-  
-        });
-      });
+      this.TestsProvider.getresult().subscribe(
+        (res)=>{
+          this.data1=res;
+          console.log(this.data1); 
+          this.TestsProvider.getAllTests().then((testsData: { assignedTest: any[], completedTest: any[] }) => {
+            this.tests = testsData.assignedTest;
+            console.log(testsData.assignedTest)
+            console.log('111111111111111111111'+JSON.stringify(testsData))
+            // this.filteredTests = testsData.assignedTest;
+            this.completedTests = testsData.completedTest;
+            console.log(testsData.completedTest)
+            // this.filteredcompletedTests = testsData.completedTest;
+            this.reload = false;
+            loader.dismiss();
+      
+          }).catch((err) => {
+            loader.dismiss();
+            loader.onDidDismiss(() => {
+              // this.toastCreator('Unable to load Tests. Please try again.');
+              this.reload = true;
+      
+            });
+          });
+        })
+     
   }
   viewResult(id:string){
     let q :any;
@@ -90,10 +92,29 @@ export class CompletedPage {
     )
   }
   onLogout(){
-    this.auth.onLogOut()
-    this.app.getRootNav().setRoot(HomePage);   
-
+    let method = this.alertCtrl.create({			
+      message: 'Do you want to logout ?',
+      buttons: [
+        {
+          text: 'Yes',
+          cssClass: 'method-color',
+          handler: () => {
+            this.auth.onLogOut()
+            this.app.getRootNav().setRoot(HomePage); 
+          }
+        },
+        {
+          text: 'No',
+          cssClass: 'method-color',
+          handler: () => {
+            // console.log('Group clicked');
+          }
+        }
+      ]
+    });
+    method.present()
       
+     
   }
 }
 

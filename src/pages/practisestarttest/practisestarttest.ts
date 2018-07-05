@@ -32,7 +32,7 @@ export class PractisestarttestPage {
       this.tts.stop();
     })
   }
-  ionViewWillEnter() {
+  ionViewDidLoad() {
   //   console.log('ionViewDidLoad StarttestPage');
   // }
   // ionViewWillEnter() {
