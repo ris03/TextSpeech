@@ -22,10 +22,8 @@ marks:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public qq: QuestionsProvider,public TestsProvider:TestsProvider) {
   }
 
+ 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AnswerPage');
-  }
-  ionViewWillEnter() {
     let data =this.TestsProvider.getAnswer();
     this.answers=data.answers;
     console.log(this.answers)

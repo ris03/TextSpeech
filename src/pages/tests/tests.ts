@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController,App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController,App,AlertController } from 'ionic-angular';
 import { TestsProvider } from '../../providers/tests/tests';
 import { StarttestPage } from '../starttest/starttest';
 import { QuestionsProvider } from '../../providers/questions/questions';
@@ -31,11 +31,11 @@ export class TestsPage {
   x=this.QuestionsProvider.practisetests;
   constructor(public navCtrl: NavController, public navParams: NavParams,private testService: TestsProvider,
     private ldCtrl: LoadingController,public app: App,public QuestionsProvider:QuestionsProvider,
-    public auth:AuthProvider
+    public auth:AuthProvider,public alerCtrl: AlertController
 ) {
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     // this.tests=this.QuestionsProvider.getQues();
     // console.log("Tests"+this.tests)
     console.log(this.x);
@@ -85,8 +85,28 @@ export class TestsPage {
    this.app.getRootNav().setRoot(PractisestarttestPage);   
   }
   onLogout(){
-    this.auth.onLogOut()
-   this.app.getRootNav().setRoot(HomePage);   
+    let method = this.alerCtrl.create({			
+			message: 'Do you want to logout ?',
+			buttons: [
+				{
+					text: 'Yes',
+					cssClass: 'method-color',
+					handler: () => {
+						this.auth.onLogOut()
+            this.app.getRootNav().setRoot(HomePage); 
+					}
+				},
+				{
+					text: 'No',
+					cssClass: 'method-color',
+					handler: () => {
+						// console.log('Group clicked');
+					}
+				}
+			]
+		});
+		method.present()
+      
      
   }
 

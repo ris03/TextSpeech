@@ -4,31 +4,19 @@ import { Http,Headers,Response } from '@angular/http';
 import { AlertController } from 'ionic-angular'
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
+import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
 apiUrl: string = 'https://candidate-cfe.herokuapp.com';
 // apiUrl: string = 'http://localhost:4000';
   public user:any;
   public authToken:any;
-  constructor(public http: Http, public alertCtrl: AlertController
+  constructor(public http: Http, public alertCtrl: AlertController,private storage: Storage
     // public navCtrl: NavController
   ) {
     console.log('Hello AuthProvider Provider');
   }
-  // alert(msg:string){
-  //   this.alertCtrl.create({
-  //     title: 'Info',
-  //     subTitle: msg,
-  //     buttons: ['OK']
-  //   }).present();
-  // }
   _errorHandler(error: any) {
     console.error(error);
     if (error.status == 0) {      
@@ -60,8 +48,10 @@ login(user){
        console.log(response.json().user)
         // localStorage.setItem('id_token',response.json().token);
         // localStorage.setItem('user',JSON.stringify(response.json().user));     
-        window.localStorage.setItem('user', JSON.stringify(response.json().user));
-        window.localStorage.setItem('token', response.json().token);
+        // window.localStorage.setItem('user', JSON.stringify(response.json().user));
+        // window.localStorage.setItem('token', response.json().token);
+        this.storage.set('user',response.json().user)
+        this.storage.set('token',response.json().token)
          this.user=response.json().user;
          this.authToken=response.json().token;
          return response.json();
@@ -71,19 +61,11 @@ login(user){
 }
   onLogOut()
   {
-  // if(this.user)
-  // {
-    // console.log(this.user);
     console.log("this.user");
-  //  return this.http.get(this.apiUrl+"/logout").map((response:Response)=>{  
-    //  console.log(response.json())
-     window.localStorage.clear();     
+    //  window.localStorage.clear();
+    this.storage.remove('user')     
+    this.storage.remove('token')     
      return true;
-      // this.user=undefined;
-      // this.authToken=undefined;
-      // localStorage.clear();
-      // this.navCtrl.popToRoot();
-      // });
     }
 
 

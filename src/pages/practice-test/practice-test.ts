@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform,App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App ,AlertController} from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { AboutPage } from '../about/about';
@@ -23,9 +23,9 @@ import { HomePage } from '../home/home';
 export class PracticeTestPage {
   text:string='';
   constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
-    public tts: TextToSpeech,public speechRecognition: SpeechRecognition,public auth:AuthProvider) {
+    public tts: TextToSpeech,public speechRecognition: SpeechRecognition,public auth:AuthProvider,public alerCtrl: AlertController) {
   }
-  ionViewWillLoad() {
+  ionViewDidLoad() {
     // this.tts.stop();
     this.speechRecognition.hasPermission()
     .then((hasPermission: boolean) => {
@@ -52,11 +52,29 @@ export class PracticeTestPage {
         }})
         }
         onLogout(){
-          console.log('logout')
-          this.auth.onLogOut()
-            // this.navCtrl.setRoot(HomePage);
-            //   this.navCtrl.popToRoot();
-            this.app.getRootNav().setRoot(HomePage);
+          let method = this.alerCtrl.create({			
+            message: 'Do you want to logout ?',
+            buttons: [
+              {
+                text: 'Yes',
+                cssClass: 'method-color',
+                handler: () => {
+                  this.auth.onLogOut()
+                  this.app.getRootNav().setRoot(HomePage); 
+                }
+              },
+              {
+                text: 'No',
+                cssClass: 'method-color',
+                handler: () => {
+                  // console.log('Group clicked');
+                }
+              }
+            ]
+          });
+          method.present()
+            
+           
         }
   // private mic_off: any = {
   //   icon: 'mic',

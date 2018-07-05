@@ -6,7 +6,10 @@ import { Observable } from 'rxjs/Rx';
 import { Http,Headers,Response } from '@angular/http';
 import { AuthProvider } from '../auth/auth';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-
+import { Storage } from '@ionic/storage';
+import 'rxjs/add/observable/fromPromise';
+// import { Observable } from 'rxjs/Observable';
+// 
 /*
   Generated class for the TestsProvider provider.
   
@@ -14,9 +17,9 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   and Angular DI.
 */
 @Injectable()
-export class TestsProvider implements OnInit {
+export class TestsProvider{
 
-    token:string;
+    token:any;
     user;
     testId:any
     testIds: any[] = [];
@@ -31,14 +34,11 @@ export class TestsProvider implements OnInit {
     apiUrl: string = 'https://candidate-cfe.herokuapp.com';
     // apiUrl: string = 'http://localhost:4000';
 
-    constructor(private http: Http,private userService: AuthProvider
+    constructor(private http: Http,private userService: AuthProvider,private storage: Storage
     ) {
         
     }
-    ngOnInit(){
-      
-        
-    }
+   
     // ionViewWillEnter(){
     //   this.user = JSON.parse(window.localStorage.getItem('user'));
     //     this.token = window.localStorage.getItem('token');
@@ -60,23 +60,28 @@ export class TestsProvider implements OnInit {
 
     }
     //================================
-    //          GETTINGG ALL TESTS FROM API
+    //          GETTINGG ALL TESTS FROM API 
     //================================
     getAllTests() {
-      this.user = window.localStorage.getItem('user');
-        this.token = window.localStorage.getItem('token');
-        console.log(this.token);    
+    //   this.user = window.localStorage.getItem('user');
+    //   this.user = this.storage.get('user');
+    //   this.token = this.storage.get('token');
+        // this.token = window.localStorage.getItem('token');
+        console.log("getalltests",this.token);    
         
-      // this.user = this.userService.user;
-      // this.token = this.userService.authToken;
+      this.user = this.userService.user;
+    //   this.token = this.userService.authToken;
         let headers = new Headers();
         let id = this.user;
 
         headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'JWT ' + this.token);
+      
         headers.append('id', id);
-
         return new Promise((resolve, reject) => {
+            this.storage.get('token').then((val) =>{
+                headers.append('Authorization', 'JWT ' + val);
+                console.log('headersssss for get all tests:',headers)
+
             this.http.get(this.apiUrl + '/tests/getassignedtests', { headers: headers })
                 .catch((err) => {
                     return this._errorHandler(err, reject);
@@ -118,7 +123,7 @@ export class TestsProvider implements OnInit {
 
                     });
 
-
+                });
 
         });
 
@@ -217,18 +222,31 @@ export class TestsProvider implements OnInit {
     getresult(){
         console.log("result entering");
         let headers = new Headers();
-        let user = this.userService.user;
-        this.token = window.localStorage.getItem('token');                
+        // let user = this.userService.user;
+        // this.token = this.storage.get('token');                
+        // this.token = window.localStorage.getItem('token');                
         headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'JWT ' + this.token);
+        // headers.append('Authorization', 'JWT ' + this.token);
         // headers.append('id ', this.userService.user.id);
-        console.log('token', this.token);
-        return this.http.get(this.apiUrl + '/tests/appresult/'+this.userService.user.id,{headers: headers }).map((response:Response)=>{  
-            console.log("result================="+JSON.stringify(response.json()));
-             return response.json();
-             });
+        // console.log('token', this.token);
+        // return this.http.get(this.apiUrl + '/tests/appresult/'+this.userService.user.id,{headers: headers }).map((response:Response)=>{  
+        //     console.log("result================="+JSON.stringify(response.json()));
+        //      return response.json();
+        //      });
+        return Observable
+        .fromPromise(this.tokenFromLocalStorage(headers))
+        .switchMap((headers) => this.http
+        .get(this.apiUrl + '/tests/appresult/'+this.userService.user.id, { headers: headers })
+        .map(res => res.json()))
            }
-    }
     
- 
+    tokenFromLocalStorage(headers) {
+        return this.storage.get('token').then((token) => {
+        console.log('token:-', token);
+        headers.append('Authorization', 'JWT ' + token);
+        return headers;
+        })
+        }
+    
+    }
 

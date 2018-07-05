@@ -25,7 +25,7 @@ import { PracCompPage } from '../prac-comp/prac-comp';
   selector: 'page-practise',
   templateUrl: 'practise.html',
 })
-export class PractisePage implements OnInit {
+export class PractisePage {
   questionArray:any=[];
   data:any;
   quesIndex:number=1;
@@ -60,7 +60,7 @@ export class PractisePage implements OnInit {
             console.log('q',this.q)
             console.log('w',this.w) 
   }
-  ngOnInit() {
+  ionViewDidLoad() {
     console.log('ionViewDidLoad PractisePage');
     // console.log(this.ans);    
     this.data=this.QuestionsProvider.getQues();

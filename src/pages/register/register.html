@@ -7,15 +7,15 @@
 <ion-header>
 
   <ion-navbar color="navred" hideBackButton>
-    <ion-title style="padding-left:38%">UListen</ion-title>
+    <ion-title style="text-align:center">UListen</ion-title>
   </ion-navbar>
-
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Serif" rel="stylesheet">
 </ion-header>
 
 
 <!-- <ion-content padding>
   <ion-list>
-    <h2 style="padding-left:38%">Sign-Up</h2>
+    <h2 style="text-align:center">Sign-Up</h2>
       <ion-item>
         <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="person"></ion-icon><span>Name</span></ion-label>
         <ion-input type="text" #name></ion-input>
@@ -46,12 +46,6 @@
 </ion-content> -->
 <ion-content no-bounce padding>
 
-  <ion-row class="app-icon-container">
-    <ion-col text-center>
-      <ion-icon name="ionic" class="app-icon-zoom"></ion-icon>
-    </ion-col>
-  </ion-row>
-
   <form [formGroup]="credentialsForm">
 
       <ion-item>
@@ -59,52 +53,56 @@
           <ion-input [formControl]="credentialsForm.controls['name']"
               type="text"></ion-input>
         </ion-item>
-    
-        <div *ngIf="!credentialsForm.controls.name.valid &&
-            credentialsForm.controls.name.dirty"
-            class="validator-error">
-          Name should have minimum 3 characters
+        <div *ngIf="credentialsForm.controls.name.invalid && (credentialsForm.controls.name.dirty || credentialsForm.controls.name.touched)" class="alert alert-danger">
+             <div *ngIf="credentialsForm.controls.name.errors.required">*Name is required.
+             </div> 
+            <div *ngIf="!credentialsForm.controls.name.pattern && credentialsForm.controls.name.dirty">
+            *Name cannot have special characters
+            </div>
         </div>
-
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input [formControl]="credentialsForm.controls['email']"
           type="email"></ion-input>
     </ion-item>
-
-    <div *ngIf="!credentialsForm.controls.email.valid &&
-        credentialsForm.controls.email.dirty"
-        class="validator-error">
-      Please enter a valid email.
-    </div>
+    <div *ngIf="credentialsForm.controls.email.invalid && (credentialsForm.controls.email.dirty || credentialsForm.controls.email.touched)" class="alert alert-danger">
+        <div *ngIf="credentialsForm.controls.email.errors.required">*E-mail is required.
+        </div> 
+       <div *ngIf="!credentialsForm.controls.email.pattern && credentialsForm.controls.email.dirty">
+       *Please provide a valid e-mail
+       </div>
+   </div>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
       <ion-input [formControl]="credentialsForm.controls['password']"
           type="password"></ion-input>
     </ion-item>
-
-    <div *ngIf="!credentialsForm.controls.password.valid &&
-        credentialsForm.controls.password.dirty"
-        class="validator-error">
-      Please enter a valid password.
-    </div>
+    <div *ngIf="credentialsForm.controls.password.invalid && (credentialsForm.controls.password.dirty || credentialsForm.controls.password.touched)" class="alert alert-danger">
+        <div *ngIf="credentialsForm.controls.password.errors.required">*Password is required.
+        </div> 
+       <div *ngIf="!credentialsForm.controls.password.pattern && credentialsForm.controls.password.dirty">
+       *Password should atleast one uppercase,special character and a numeric character
+       </div>
+   </div>
     <ion-item>
         <ion-label floating>Confirm Password</ion-label>
         <ion-input [formControl]="credentialsForm.controls['cpassword']"
             type="password"></ion-input>
       </ion-item>
   
-      <div *ngIf="!credentialsForm.controls.cpassword.valid &&
-          credentialsForm.controls.cpassword.dirty"
-          class="validator-error">
-        Please enter a valid password.
+      <div *ngIf="credentialsForm.controls.cpassword.invalid && (credentialsForm.controls.cpassword.dirty || credentialsForm.controls.cpassword.touched)" class="alert alert-danger">
+          <div *ngIf="credentialsForm.controls.cpassword.errors.required">*Password is required.
+          </div> 
+         <div *ngIf="credentialsForm.controls.cpassword !== credentialsForm.controls.password">
+            *Passwords don't match
+         </div>
       </div>
 
     <ion-row class="sign-in-button-container">
       <ion-col text-center>
         <button ion-button block color="secondary"
-            [disabled]="!credentialsForm.valid" (click)="onSignIn()">
+            [disabled]="!credentialsForm.valid" (click)="onRegister()">
           Sign in
         </button>
       </ion-col>

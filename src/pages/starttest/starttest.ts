@@ -22,7 +22,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   selector: 'page-starttest',
   templateUrl: 'starttest.html',
 })
-export class StarttestPage implements OnInit{
+export class StarttestPage{
   instruction:string= 'All Questions are compulsory. Test contains total of 10 questions. Question and its options will be read to you. After that You will be provided 30 seconds to solve the question. After that Google Assistant will pop-up to record your answer. Speak your answer carefully. Once recorded, it can\'t be changed. Make sure you have a good internet connection. Make sure your microphone and speakers are in good working condition.To proceed press next or speak next or to listen the question again say repeat' 
   ttstext:string=' ';
   ttstextmatch:string=' ';
@@ -42,31 +42,13 @@ export class StarttestPage implements OnInit{
       this.tts.stop();
     })
   }
-
-  ngOnInit()
-  {
+  
+  
+  ionViewDidLoad() {
     this.headerRef = document.getElementsByClassName('custom-card')[0];
-  }
-
-
-  onScrollCon(event) {
-
-    if ((event.scrollTop < 10)) {
-      this.headerRef.style.opacity = eval("1" + "-0.0" + event.scrollTop);
-
-    }
-    if (event.scrollTop > 9 && event.scrollTop < 101)
-      this.headerRef.style.opacity = eval("1" + "-0." + event.scrollTop);
-
-  }
-
-  onConfirmation() {
-    this.confirmation = !this.confirmation;
-  }
-  ionViewWillEnter() {
-  //   console.log('ionViewDidLoad StarttestPage');
-  // }
-  // ionViewWillEnter() {
+    //   console.log('ionViewDidLoad StarttestPage');
+    // }
+    // ionViewWillEnter() {
     // console.log(this.id);
       this.speechRecognition.hasPermission()
       .then((hasPermission: boolean) => {
@@ -91,6 +73,21 @@ export class StarttestPage implements OnInit{
   
   
     }
+
+  onScrollCon(event) {
+    
+    if ((event.scrollTop < 10)) {
+      this.headerRef.style.opacity = eval("1" + "-0.0" + event.scrollTop);
+      
+    }
+    if (event.scrollTop > 9 && event.scrollTop < 101)
+    this.headerRef.style.opacity = eval("1" + "-0." + event.scrollTop);
+    
+  }
+  
+  onConfirmation() {
+    this.confirmation = !this.confirmation;
+  }
     readInstruction(){
       if(this.speak){
         this.tts.speak({

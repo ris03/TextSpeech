@@ -56,7 +56,7 @@ export class ContactPage {
 //     () => console.log('Denied')
 //   )
 // }
-ngOnInit() {
+ionViewDidLoad() {
 
   this.speechRecognition.hasPermission()
     .then((hasPermission: boolean) => {

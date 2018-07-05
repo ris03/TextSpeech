@@ -1,25 +1,23 @@
 <ion-header>
   <ion-navbar color="navred" >
-    <ion-title style="padding-left:34%">u-Listen</ion-title>
+    <ion-title style='text-align:center'>u-Listen</ion-title>
   </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Serif" rel="stylesheet">
 </ion-header>
  
 <ion-content padding>
 <h2 style="text-align:center">Welcome to uListen</h2>
 <div style='padding-top:20%'>
-    <img src="assets/image1.png">
+    <img class='center' src="assets/image1.png">
 </div>
 <br>
-<div style='padding-top:5%;padding-left:15%'>
+<div style='text-align:center'>
     <button center ion-button icon-start color="navred" (click)="signin()">
         <ion-icon style="color:whitesmoke" name="star"></ion-icon>
         <span style="color:w6ite"> Sign In </span>
       </button>
       <button ion-button icon-start outline color="navred" (click)="register()">
         <ion-icon name="star">
-
-
-          
         </ion-icon>
         Register
       </button>

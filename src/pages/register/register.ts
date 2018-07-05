@@ -33,7 +33,7 @@ export class RegisterPage {
   this.credentialsForm = this.formBuilder.group({
     name: [
       '', Validators.compose([
-        Validators.pattern('\[^A-Za-z0-9_@\.]|@{2,}|\.{5,}\\'),
+        Validators.pattern(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/),
         Validators.required
       ])
     ],
@@ -77,10 +77,10 @@ onSignIn() {
     console.log('ionViewDidLoad RegisterPage');
   }
   onRegister(){
-    if(!this.credentialsForm.value.password ||!this.credentialsForm.value.email||!this.password.value||!this.cpassword.value){
+    if(!this.credentialsForm.value.password ||!this.credentialsForm.value.email||!this.credentialsForm.value.password||!this.credentialsForm.value.cpassword){
       this.alert('Please fill in the details!')
     } else {
-      if(this.cpassword.value !== this.password.value){
+      if(this.credentialsForm.value.cpassword !== this.credentialsForm.value.password){
       this.alert('Passwords don\'t match!')        
       } else {
         let loading = this.loader.create({
@@ -89,9 +89,9 @@ onSignIn() {
         });
         loading.present();
         const user ={
-          name:this.name.value,
-          email:this.email.value,
-          password:this.password.value,
+          name:this.credentialsForm.value.name,
+          email:this.credentialsForm.value.email,
+          password:this.credentialsForm.value.password
         }
         this.sService.registerUser(user).subscribe(
           (user)=>{

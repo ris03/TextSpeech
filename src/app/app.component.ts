@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { IntroPage } from '../pages/intro/intro';
 import { HomePage } from '../pages/home/home';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,20 +22,27 @@ export class MyApp {
   // rootPage:any = StarttestPage;
   showSplash=true;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private storage: Storage) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private storage: Storage,private auth: AuthProvider) {
     platform.ready().then(() => {
-      this.storage.get('introShown').then((result) => {
- 
-        if(result){
-          this.rootPage = HomePage;
+      this.storage.get('token').then((token)=>{
+        if(token){
+          this.auth.user=this.storage.get('user')
+          this.auth.authToken=token;
+          console.log('aaaaaa',this.auth.user,this.auth.authToken)
+          this.rootPage = TabsPage;
         } else {
-          this.rootPage = IntroPage;
-          this.storage.set('introShown', true);
+          this.storage.get('introShown').then((result) => {
+            if(result){
+              this.rootPage = HomePage;
+            } else {
+              this.rootPage = IntroPage;
+              this.storage.set('introShown', true);
+            }
+            // this.loader.dismiss();
+          });
         }
- 
-        // this.loader.dismiss();
- 
-      });
+      })
+      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
