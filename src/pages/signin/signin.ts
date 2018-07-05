@@ -25,13 +25,7 @@ export class SigninPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SigninPage');
   }
-  alert(msg:string){
-    this.alertCtrl.create({
-      title: 'Info',
-      subTitle: msg,
-      buttons: ['OK']
-    }).present();
-  }
+
   signIn(){
     if(!this.username.value || !this.password.value){
       this.alert('Please fill in the details');      
@@ -49,7 +43,7 @@ export class SigninPage {
       this.auth.login(user).subscribe(
         (user)=>{
           console.log(user);
-          if(user.msg==='You are logged in'){
+          if(user.msg ==='You are logged in'){
 
             this.alert('You are logged in');
             if(this.username.value ){
@@ -73,6 +67,13 @@ export class SigninPage {
   }
   oncreate(){
     this.navCtrl.push(RegisterPage)
+  }
+  alert(msg:string){
+    this.alertCtrl.create({
+      title: 'Info',
+      subTitle: msg,
+      buttons: ['OK']
+    }).present();
   }
   toaster(message: string) {
     this.toast.create({

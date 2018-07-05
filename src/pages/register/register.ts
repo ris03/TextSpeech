@@ -2,6 +2,9 @@ import { Component,ViewChild } from '@angular/core';
 import { App,IonicPage, NavController, NavParams,AlertController ,LoadingController,ToastController} from 'ionic-angular';
 import { SigninPage } from '../signin/signin';
 import { AuthProvider } from '../../providers/auth/auth';
+import { FormBuilder,FormControl, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
+
+
 
 /**
  * Generated class for the RegisterPage page.
@@ -21,12 +24,48 @@ export class RegisterPage {
   @ViewChild('email') email
   @ViewChild('password') password
   @ViewChild('cpassword') cpassword
+  credentialsForm: FormGroup;
   // tab:Tabs;
-  constructor(public app:App,public navCtrl: NavController, public navParams: NavParams, 
+  constructor(private formBuilder: FormBuilder,public app:App,public navCtrl: NavController, public navParams: NavParams, 
     private sService: AuthProvider,public alertCtrl: AlertController,public loader: LoadingController,public toast: ToastController
   ) {
   // this.tab=navCtrl.parent;    
+  this.credentialsForm = this.formBuilder.group({
+    name: [
+      '', Validators.compose([
+        Validators.pattern('\[^A-Za-z0-9_@\.]|@{2,}|\.{5,}\\'),
+        Validators.required
+      ])
+    ],
+    email: [
+      '', Validators.compose([
+        Validators.pattern('[a-zA-Z0-9._]+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}'),
+        Validators.required
+      ])
+    ],
+    password: [
+      '', Validators.compose([
+      // Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/),
+      Validators.pattern(/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/),      
+        Validators.required
+      ])
+    ],
+    cpassword: [
+      '', Validators.compose([
+        Validators.pattern(/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/),
+        Validators.required
+      ])
+    ]
+  });
+}
+onSignIn() {
+  
+  if (this.credentialsForm.valid) {
+      console.log('form working',this.credentialsForm.value.email);
   }
+}
+
+  
   alert(msg:string){
     this.alertCtrl.create({
       title: 'Info',
@@ -38,7 +77,7 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
   onRegister(){
-    if(!this.name.value ||!this.email.value||!this.password.value||!this.cpassword.value){
+    if(!this.credentialsForm.value.password ||!this.credentialsForm.value.email||!this.password.value||!this.cpassword.value){
       this.alert('Please fill in the details!')
     } else {
       if(this.cpassword.value !== this.password.value){
@@ -70,9 +109,10 @@ export class RegisterPage {
             this.navCtrl.push(SigninPage);  
           },     
           (error)=>{
+            let e = error.json();
             console.log(error);
             loading.dismiss();
-            this.toaster(error);    
+            this.toaster(e.msg);    
           }
         )
       }
@@ -86,5 +126,8 @@ export class RegisterPage {
       message: message,
       duration: 3000
     }).present();
+  }
+  rg(){
+
   }
 }

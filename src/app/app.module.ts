@@ -20,7 +20,7 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { QuestionsProvider } from '../providers/questions/questions';
 // import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PracticeTestPage } from '../pages/practice-test/practice-test';
 import { IntroPage } from '../pages/intro/intro';
 import {IonicStorageModule} from '@ionic/storage';
@@ -57,6 +57,7 @@ import { PracCompPage } from '../pages/prac-comp/prac-comp';
     BrowserModule,
     HttpModule,
     FormsModule, 
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

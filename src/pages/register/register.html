@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<!-- <ion-content padding>
   <ion-list>
     <h2 style="padding-left:38%">Sign-Up</h2>
       <ion-item>
@@ -35,9 +35,90 @@
         </ion-item>
     
     </ion-list>
-    
-    <div style="padding-left:34%">
+
+
+<div style="padding-left:34%">
       <button color="navred" ion-button (click)="onRegister()">Register</button>
     </div>
-    <h5 style="font-size:12px;padding-left:25%">Already have an account? <span (click)="onlogin()"style="color:rgb(3, 85, 84)">Log In</span></h5>
+<h5 style="font-size:12px;padding-left:25%">Already have an account?
+  <span (click)="onlogin()" style="color:rgb(3, 85, 84)">Log In</span>
+</h5>
+</ion-content> -->
+<ion-content no-bounce padding>
+
+  <ion-row class="app-icon-container">
+    <ion-col text-center>
+      <ion-icon name="ionic" class="app-icon-zoom"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <form [formGroup]="credentialsForm">
+
+      <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input [formControl]="credentialsForm.controls['name']"
+              type="text"></ion-input>
+        </ion-item>
+    
+        <div *ngIf="!credentialsForm.controls.name.valid &&
+            credentialsForm.controls.name.dirty"
+            class="validator-error">
+          Name should have minimum 3 characters
+        </div>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['email']"
+          type="email"></ion-input>
+    </ion-item>
+
+    <div *ngIf="!credentialsForm.controls.email.valid &&
+        credentialsForm.controls.email.dirty"
+        class="validator-error">
+      Please enter a valid email.
+    </div>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['password']"
+          type="password"></ion-input>
+    </ion-item>
+
+    <div *ngIf="!credentialsForm.controls.password.valid &&
+        credentialsForm.controls.password.dirty"
+        class="validator-error">
+      Please enter a valid password.
+    </div>
+    <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input [formControl]="credentialsForm.controls['cpassword']"
+            type="password"></ion-input>
+      </ion-item>
+  
+      <div *ngIf="!credentialsForm.controls.cpassword.valid &&
+          credentialsForm.controls.cpassword.dirty"
+          class="validator-error">
+        Please enter a valid password.
+      </div>
+
+    <ion-row class="sign-in-button-container">
+      <ion-col text-center>
+        <button ion-button block color="secondary"
+            [disabled]="!credentialsForm.valid" (click)="onSignIn()">
+          Sign in
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button clear color="light"
+            (click)="onForgotPassword()">
+          Forgot your password?
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
 </ion-content>
