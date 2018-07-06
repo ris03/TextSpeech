@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams,AlertController,LoadingController,T
 import { AuthProvider } from '../../providers/auth/auth';
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
+import { FormBuilder,FormControl, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
+
+
 
 /**
  * Generated class for the SigninPage page.
@@ -17,17 +20,34 @@ import { RegisterPage } from '../register/register';
   templateUrl: 'signin.html',
 })
 export class SigninPage {
-  @ViewChild('username') username;
-  @ViewChild('password') password;
-  constructor(public loader: LoadingController,public toast: ToastController,public navCtrl: NavController, public navParams: NavParams,private auth:AuthProvider, public alertCtrl: AlertController) {
+  // @ViewChild('username') username;
+  // @ViewChild('password') password;
+  credentialsForm: FormGroup;
+  constructor(private formBuilder: FormBuilder,public loader: LoadingController,public toast: ToastController,public navCtrl: NavController, public navParams: NavParams,private auth:AuthProvider, public alertCtrl: AlertController) {
+    this.credentialsForm = this.formBuilder.group({
+      email: [
+        '', Validators.compose([
+          Validators.pattern('[a-zA-Z0-9._]+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}'),
+          Validators.required
+        ])
+      ],
+      password: [
+        '', Validators.compose([
+        // Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/),
+        Validators.pattern(/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/),      
+          Validators.required
+        ])
+      ]
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SigninPage');
+  
   }
 
   signIn(){
-    if(!this.username.value || !this.password.value){
+    if(!this.credentialsForm.value.password || !this.credentialsForm.value.email){
       this.alert('Please fill in the details');      
     }
     else {
@@ -37,8 +57,8 @@ export class SigninPage {
       });
       loading.present();
       const user = {
-        email: this.username.value,
-        password: this.password.value
+        email: this.credentialsForm.value.email,
+        password: this.credentialsForm.value.password
       }
       this.auth.login(user).subscribe(
         (user)=>{
@@ -46,7 +66,7 @@ export class SigninPage {
           if(user.msg ==='You are logged in'){
 
             this.alert('You are logged in');
-            if(this.username.value ){
+            if(this.credentialsForm.value.email ){
               this.navCtrl.setRoot(TabsPage);
                 this.navCtrl.popToRoot();
                 }

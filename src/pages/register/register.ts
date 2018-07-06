@@ -58,12 +58,6 @@ export class RegisterPage {
     ]
   });
 }
-onSignIn() {
-  
-  if (this.credentialsForm.valid) {
-      console.log('form working',this.credentialsForm.value.email);
-  }
-}
 
   
   alert(msg:string){

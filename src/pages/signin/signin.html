@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <!-- <ion-list>
     <h2 style="text-align:center">Sign-In</h2>
     <ion-item>
       <ion-label floating><ion-icon color="navred" style="padding-right:5px;font-size:3rem" name="mail"></ion-icon>E-mail</ion-label>
@@ -31,5 +31,39 @@
   <div style="text-align:center">
     <button color="navred" ion-button (click)="signIn()">Sign In</button>
   </div>
-  <h5 style="font-size:12px;text-align:center">Create new account!! <span (click)="oncreate()" style="color:#1E90FF">Sign up</span></h5>
+  <h5 style="font-size:12px;text-align:center">Create new account!! <span (click)="oncreate()" style="color:#1E90FF">Sign up</span></h5> -->
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input [formControl]="credentialsForm.controls['email']"
+        type="email"></ion-input>
+  </ion-item>
+  <div *ngIf="credentialsForm.controls.email.invalid && (credentialsForm.controls.email.dirty || credentialsForm.controls.email.touched)" class="alert alert-danger">
+      <div *ngIf="credentialsForm.controls.email.errors.required">*E-mail is required.
+      </div> 
+     <div *ngIf="!credentialsForm.controls.email.pattern && credentialsForm.controls.email.dirty">
+     *Please provide a valid e-mail
+     </div>
+ </div>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input [formControl]="credentialsForm.controls['password']"
+        type="password"></ion-input>
+  </ion-item>
+  <div *ngIf="credentialsForm.controls.password.invalid && (credentialsForm.controls.password.dirty || credentialsForm.controls.password.touched)" class="alert alert-danger">
+      <div *ngIf="credentialsForm.controls.password">*Password is required.
+      </div> 
+     <!-- <div *ngIf="!credentialsForm.controls.password.pattern && credentialsForm.controls.password.dirty">
+     *Password should atleast one uppercase,special character and a numeric character
+     </div> -->
+ </div>
+ <ion-row class="sign-in-button-container">
+  <ion-col text-center>
+    <button ion-button block color="secondary"
+        [disabled]="!credentialsForm.valid" (click)="signIn()">
+      Sign in
+    </button>
+  </ion-col>
+</ion-row>
 </ion-content>
+
